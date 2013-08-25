@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+G:\phonegap\.metadata\.plugins\org.eclipse.jdt.core
+4281140037.index
