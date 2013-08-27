@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+        this.testzone = {};
     },
     // Bind Event Listeners
     //
@@ -33,8 +34,16 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        console.log("Nuclear lauch detected");
+        app.testzone = document.getElementById("test-zone");
+        app.testzone.innerHTML = "Nuclear lauch detected";
+        //navigator.accelerometer.getCurrentAcceleration(onSuccess,onErro);
         app.receivedEvent('deviceready');
     },
+
+
+
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -45,5 +54,11 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    onSuccess:function(acceleration){
+        
+    },
+    onErro:function(e){
+        alert('onError!!!');
     }
 };

@@ -47,8 +47,4 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
-    <feature name="Accelerometer">
-    	<param name="android-package" value="org.apache.cordova.AccelListener" />
-	</feature>
-    
 </widget>
