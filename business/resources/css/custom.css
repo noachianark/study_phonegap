@@ -1,0 +1,125 @@
+
+html{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+/* login panel css styles */
+.loginPanel .fieldSet{
+	text-align: center;
+	padding:10px;
+	padding-top: 15px;
+}
+.loginPanel .button{
+	margin:10px;
+}
+.loginPanel{
+	background-color: #fff;
+}
+/* end of login panel css styles block */
+
+
+
+
+
+
+/* main panel css style*/
+.mainpanel .scanBtn{
+	background-color: #157efb;
+}
+.mainpanel .x-tab{
+	height: 2.4em;
+}
+.mainpanel .x-tabbar.x-docked-bottom{
+	min-height: 2.4em;
+}
+.scanBtn.x-tab .x-button-icon:before{
+	color: #fff;
+}
+.scanBtn .x-button-icon{
+	color: #fff;
+}
+.scanBtn.x-tab .x-button-label{
+	color: #fff;
+}
+.mainpanel .x-tab .x-button-icon{
+	width: 100%;
+	height: 100%;
+}
+/* end of main panel css style*/
+
+
+
+
+/* stream list css*/
+.stream-list{
+	background-color: #eef2f5;
+}
+.stream-list .itemlist{
+	height: 100%;
+}
+.stream-list .post-item{
+   	margin: 20px;
+   	min-height: 400px;
+   	background-color: #fff;
+   	border-radius: 10px;
+   	border:1px #888;
+}
+.stream-list .x-scroll-indicator {
+    opacity: 0 !important;
+}
+
+/* end of stream list css*/
+
+
+
+
+/*user profile css*/
+.user-profile .user-avatar{
+	min-height: 128px;
+	min-width: 128px;
+	border:1px #ff0000;
+}
+.user-profile .profiles{
+	margin:10px;
+}
+.user-profile .credits{
+
+}
+.user-profile .buttons{
+
+}
+/*end of profile css*/
+
+
+
+
+/* fix cupertino css bugs and custom some css styles */
+.x-form-fieldset .x-field:before{
+	left: 0px;
+}
+.x-form-field {
+	padding:0 15px;
+}
+.x-mask .x-mask-inner{
+	background: rgba(0, 0, 0, 0.3);
+}
+.x-mask .x-mask-inner .x-mask-message{
+	color:#fff;
+}
+.x-loading-spinner{
+	color: #fff;
+}
+.x-navigation-bar.x-dock-item.x-docked-top{
+	background-color: #f6f6f8;
+}
+.x-button-label{
+	font-weight: bold;
+}
+.x-form .x-scroll-container{
+	background-color: #eef2f5;
+}
+.x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{
+	font-weight: bolder;
+	color:#8e8e8e;
+}

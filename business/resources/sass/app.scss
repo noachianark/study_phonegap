@@ -1,0 +1,24 @@
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+@import 'sencha-touch/cupertino';
+@import 'sencha-touch/cupertino/all';
+
+// Custom code goes here..
+
+// Examples of using the icon mixin:
+// @include icon('user');
+
+@include icon-font('Icomoon', inline-font-files(
+  'icomoon/icomoon.woff', woff,
+  'icomoon/icomoon.ttf', truetype,
+  'icomoon/icomoon.svg', svg
+));
+
+@include icon('moon-qrcode','\e633','Icomoon');
+@include icon('moon-tags','\e631','Icomoon');
+@include icon('moon-news','\e604','Icomoon');
+@include icon('moon-user','\e670','Icomoon');
+@include icon('moon-hammer','\e691','Icomoon');
+@include icon('moon-cog','\e68e','Icomoon');
+@include icon('moon-gift','\e699','Icomoon');
