@@ -75,14 +75,33 @@ html{
 
 
 /*user profile css*/
-.user-profile .user-avatar{
-	min-height: 128px;
-	min-width: 128px;
-	border:1px #ff0000;
-}
 .user-profile .profiles{
-	margin:10px;
+	margin:15px;
 }
+.user-profile .user-avatar{
+	font-size: 80px;
+	font-family: 'icomoon';
+}
+.user-avatar-inner{
+	/*color: #157efb;*/
+	color: #bababa;
+	border-right: 1px solid #bababa;
+	padding-right: 15px;
+}
+.user-avatar:before{
+	content:'\e60b';
+}
+
+.user-profile-info{
+	margin-left: 15px; 
+	text-align: center;
+	font-size: 16px;
+}
+
+.user-card-type{
+	margin-left: 15px; 
+}
+
 .user-profile .credits{
 
 }

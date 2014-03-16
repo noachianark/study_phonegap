@@ -29,13 +29,16 @@ Ext.define('Business.controller.StreamList', {
 				    	html:"<p style='text-align:center;'>通过照片发送资讯</p><br>"
 				    },
 			        {
+			        	iconCls:'icon-camera',
 			            text: '通过照相机获取图片'
 			        },
 			        {
+			        	iconCls:'icon-image',
 			            text: '从相册中获取图片'
 			        },
 			        {
 			            text: '取消',
+			            iconCls:'icon-close',
 			            listeners:{
 			            	tap:{
 			            		fn:function(){

@@ -1,2 +1,2 @@
 // @tag full-page
-// @require G:\phonegap\business\app.js
+// @require G:\phonegap\github_phonegap\business\app.js

@@ -21,18 +21,18 @@ Ext.define('Business.view.MainPanel', {
                 xtype:"streamlist",
                 title:"",
                 label:"已发送资讯",
-                iconCls:"moon-news"
+                iconCls:"icon-newspaper"
             },
             {
                 title:'',
                 itemId:"scan",
-                iconCls:"moon-qrcode"
+                iconCls:"icon-qrcode"
             },
             {
                 html:"Second Tab",
                 title:"我",
                 label:"商家资料",
-                iconCls:"moon-user"
+                iconCls:"icon-home"
             }
         ]
     },
@@ -40,14 +40,15 @@ Ext.define('Business.view.MainPanel', {
     postBtn:{
         xtype:'button',
         text:'',
-        iconCls:"moon-news",
+        iconCls:"icon-pencil",
         align:'right',
         itemId:'postBtn'
     },
 
     quitBtn:{
         xtype:'button',
-        text:'退出',
+        text:'',
+        iconCls:"icon-switch",
         align:'right',
         itemId:'quitBtn'
     },
