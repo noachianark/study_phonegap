@@ -4,7 +4,7 @@
  * Description
  */
 Ext.define('Business.view.UserProfile', {
-    extend: 'Ext.Container',
+    extend: 'Ext.Panel',
     alias:'widget.userprofile',
     config: {
     	cls:"user-profile",
@@ -40,43 +40,162 @@ Ext.define('Business.view.UserProfile', {
                                 defaults: {
                                     xtype: 'component',
                                     margin: '5 5 5 5'
-                                },                                 
+                                },
+                                data:{
+                                    balance:"100"
+                                },
                                 items:[
         							{
+                                        itemId:'consumed',
                                         flex:1,
+                                        xtype:'label',
         								cls:"user-account-info",
-        								html:"0"
+        								tpl:"￥{consumed}<br><span class='user-account-info-label'>已消费</span>"
         							},
         							{
+                                        itemId:'balance',
                                         flex:1,
+                                        xtype:'label',
         								cls:"user-account-info",
-        								html:"1"
+        								tpl:"￥{balance}<br><span class='user-account-info-label'>余额</span>"
         							},
         							{
+                                        itemId:'credit',
                                         flex:1,
+                                        xtype:'label',
         								cls:"user-account-info",
-        								html:"2"
+        								tpl:"{credit}<br><span class='user-account-info-label'>积分</span>"
         							}
         						]
         					},
+
                             {
-                                cls:'user-card-type',
                                 flex:1,
-                                html:"普卡"
+                                xtype:"container",
+                                cls:'user-card-type',
+                                layout:{
+                                    type:'hbox',
+                                    pack:'center',
+                                    align:'center'
+                                },
+                                defaults: {
+                                    xtype: 'component',
+                                    margin: '5 5 5 5'
+                                }, 
+                                items:[
+                                    {
+                                        flex:1,
+                                        html:"<span class='user-card-type-label'>普卡</span>"
+                                    },
+                                    {
+                                        flex:2
+                                    }
+                                ]
                             }
+
         				]
         			}
         		]
         	},
+
+
+
+            //benifit panel
         	{
         		xtype:'container',
-        		html:'lala',
-        		cls:'credits'
+        		cls:'credits',
+                defaults: {
+                    xtype: 'label',
+                    margin: '5 5 5 5'
+                },
+                layout:{
+                    type:"hbox",
+                    pack:"center"
+                },
+                items:[
+                    {
+                        itemId:'discount',
+                        flex:1,
+                        tpl:"{discount}%<br><span class='user-account-info-label'>折扣比</span>"
+                    },
+                    {
+                        itemId:'rebate',
+                        flex:1,
+                        tpl:"{rebate}%<br><span class='user-account-info-label'>返现比</span>"
+                    },
+                    {
+                        itemId:'rate',
+                        flex:1,
+                        tpl:"{rate}%<br><span class='user-account-info-label'>积分比</span>"
+                    },
+                    {
+                        itemId:'left_credit',
+                        flex:1,
+                        tpl:"{left_credit}<br><span class='user-account-info-label'>剩余积分</span>"
+                    }                                 
+                ]
         	},
+
+
+
+
+            //4 buttons layout
         	{
         		xtype:'container',
-        		html:'xxxx',
-        		cls:'buttons'
+        		layout:{
+                    type:"vbox",
+                    pack:"center"
+                },
+                flex:1,
+        		cls:'buttons',
+                items:[
+                    {
+                        xtype:"container",
+                        layout:{
+                            type:"hbox",
+                            pack:"center",
+                            align:"center"
+                        },
+                        width:"100%",
+                        items:[
+                            {
+                                cls:"user-action-top-left",
+                                flex:1,
+                                xtype:"button",
+                                text:"会员充值"
+                            },
+                            {
+                                cls:"user-action-top-right",
+                                flex:1,
+                                xtype:"button",
+                                text:"积分兑换"
+                            }
+                        ]
+                    },
+                    {
+                        xtype:"container",
+                        layout:{
+                            type:"hbox",
+                            pack:"center",
+                            align:"center"
+                        },
+                        width:"100%",
+                        items:[
+                            {
+                                cls:"user-action-bottom-left",
+                                flex:1,
+                                xtype:"button",
+                                text:"会员结账"
+                            },
+                            {
+                                cls:"user-action-bottom-right",
+                                flex:1,
+                                xtype:"button",
+                                text:"提取现金"
+                            }
+                        ]
+                    }
+                ]
         	}
         ]
     },

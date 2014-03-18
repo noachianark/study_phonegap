@@ -45,11 +45,28 @@ Ext.define('Business.controller.MainPanel', {
 
     scanAction:function(){
         //开启相机并扫描，返回结果后转至showUserProfile。
-        this.showUserProfile();
+        //根据用户ID调用store,返回数据后，调用user profile页面。
+        var me = this;
+        var store = Ext.create("Business.store.User");
+        store.load({
+            scope:this,
+            callback: function(records, operation, success){
+                if (success) {
+                    me.showUserProfile(records);
+                } else {
+                    console.log('error');
+                }                
+            }
+        });
+
+        
     },
 
-    showUserProfile:function(){
+    showUserProfile:function(records){
         //获取到用户信息。
-        this.getNavi().push([{xtype:'userprofile'}]);
+        var profile = Ext.create("Business.view.UserProfile");
+        profile.setData(records[0]);
+        profile.setTitle(records[0].get('username'));
+        this.getNavi().push([profile]);
     }
 });
