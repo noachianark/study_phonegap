@@ -13,7 +13,7 @@ Ext.define('Business.controller.UserProfile', {
         	consume:'userprofile #consume',
         	withdraw:'userprofile #withdraw',
         	exchange:'userprofile #exchange',
-        	main:"mainpanel"
+        	navi:"main"
         },
         control:{
         	userview:{
@@ -38,7 +38,10 @@ Ext.define('Business.controller.UserProfile', {
     },
 
     chargeAction:function(){
-    	
+        console.log('asdasd');
+        var charge = Ext.create('Business.view.Charge');
+        //charge.userinfo = this.userinfo;
+        this.getNavi().push([charge]);    	
     },
 
     consumeAction:function(){
@@ -55,7 +58,7 @@ Ext.define('Business.controller.UserProfile', {
 
     //when view apply setData function , call this function to fill the data to children fields
     updateinfo:function(me, newData, eOpts){
-    	this.userinfo = newData;
+    	this.getUserview().userinfo = newData;
 		this.getUserview().down('#balance').setData({balance:newData.get('balance')});
 		this.getUserview().down('#credit').setData({credit:newData.get('credit')});
 		this.getUserview().down('#consumed').setData({consumed:newData.get('consumed')});

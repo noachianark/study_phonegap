@@ -1,0 +1,60 @@
+.red .x-progress-bar {
+    height: 17px;
+    border: none;
+    border-top: 1px solid #fff;
+    background: transparent url(../images/custom-bar3.gif) repeat-x !important;
+}
+.orange .x-progress-bar {
+    height: 17px;
+    border: none;
+    border-top: 1px solid #fff;
+    background: transparent url(../images/custom-bar2.gif) repeat-x !important;
+}
+.checkLabel{
+	font-size: 14px;
+	margin: 18px;
+	font-family: 微软雅黑;
+}
+.x-window-default{
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	-ms-border-radius:10px;
+	-o-border-radius:10px;
+	border-radius:10px;
+}
+.west-div{
+	border:0px;
+	height:80px;
+	width:100%;
+	background:#222;
+	color:#bbb;
+	text-align:center;
+	line-height:80px;
+	font-size: 14px;
+	font-family: 微软雅黑;
+}
+.west-div .west-font{
+	margin:0px auto;
+	width:150px;
+	padding-left:10px;
+	text-align: left;
+}
+.west-div .west-img{
+	width: 36px;
+	height:36px;
+	margin-bottom:-12px;
+	margin-right:10px;
+}
+.west-div:hover{
+	cursor:pointer;
+	color:#fff;
+}
+.fontlink{
+	text-decoration: none;
+	color: #000;
+	font-family: 微软雅黑;
+	font-size: 12px;
+}
+.fontlink:hover{
+	color: blue;
+}

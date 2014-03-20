@@ -30,7 +30,8 @@ Ext.application({
         'Login',
         'MainPanel',
         'StreamList',
-        'UserProfile'
+        'UserProfile',
+        'Charge'
     ],
 
     models:[
