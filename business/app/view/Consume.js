@@ -1,0 +1,72 @@
+/**
+ * @class Business.view.Consume
+ * @extends Ext.Container
+ * Description
+ */
+Ext.define('Business.view.Consume', {
+    extend: 'Ext.form.Panel',
+    alias:'widget.consumepanel',
+    requires:[
+        'Ext.field.Number'
+    ],
+    config: {
+        cls:'consume',
+        title:'会员结账',
+        layout:'vbox',
+        items:[
+        	{
+        		xtype:'fieldset',
+        		items:[
+        			{
+        				xtype:'numberfield',
+        				itemId:'consumefield',
+        				name:'consumes',
+        				label:'消费金额'
+        			}
+        		]
+        	},
+			{
+				xtype:'label',
+				itemId:'discount',
+				tpl:'折扣比：{discount}%'
+			},
+			{
+				xtype:'label',
+				itemId:'payfor',
+				tpl:'实际消费：￥{payfor}元'
+			},
+			{
+				xtype:'fieldset',
+				items:[
+					{
+						xtype:'numberfield',
+						itemId:'cardpayfield',
+						name:'cardpay',
+						label:'余额支付'
+					},
+					{
+						xtype:'numberfield',
+						itemId:'cashpayfield',
+						name:'cashpay',
+						label:'现金支付'
+					}
+				]
+			},
+			{
+				xtype:'label',
+				itemId:'credit',
+				tpl:'完成支付获得积分{credit}'
+			},
+			{
+				xtype:'label',
+				itemId:'balance',
+				tpl:'支付完毕后账户余额￥{balance}'
+			},
+			{
+				xtype:"button",
+				itemId:'consume',
+				text:"结账"
+			}
+        ]
+    }
+});

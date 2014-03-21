@@ -122,9 +122,6 @@ html{
 	border-top: 1px solid #bababa;
 	border-bottom: 1px solid #bababa;
 }
-.user-profile .buttons{
-	
-}
 
 [class*="user-action-"]{
 	width: 40vw;
@@ -139,11 +136,20 @@ html{
 .user-profile .user-action-bottom-left{
 	margin:10px 10px 20px 20px;
 }
-
 .user-profile .user-action-bottom-right{
 	margin:10px 20px 20px 10px;
 }
 /*end of profile css*/
+
+
+
+
+
+/*css of charge view*/
+.charge .fast-charge{
+	margin: 15px;
+}
+/*end of charge view css*/
 
 
 

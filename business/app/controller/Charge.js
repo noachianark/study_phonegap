@@ -6,7 +6,6 @@
 Ext.define('Business.controller.Charge', {
     extend: 'Ext.app.Controller',
     requires:[
-        'Ext.field.Number',
         'Business.view.ChargeSuccess'
     ],
     config: {

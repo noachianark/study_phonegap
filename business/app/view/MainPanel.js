@@ -55,8 +55,9 @@ Ext.define('Business.view.MainPanel', {
 
     //for every component view which has deal with navbar
     setNavBar:function(navi,panel){
+        // navi.getNavigationBar().rightBox.removeAll();
+        // navi.getNavigationBar().leftBox.removeAll();
         if(panel){
-
             if(panel.isXType('streamlist')){
                 navi.getNavigationBar().add(this.postBtn);
             }else{
@@ -65,9 +66,11 @@ Ext.define('Business.view.MainPanel', {
             navi.getNavigationBar().setTitle(panel.label);
             return;
         }
-
         navi.getNavigationBar().setTitle(this.getActiveItem().label);
+
         if(this.getActiveItem().isXType('streamlist')){
+            console.log("nani?????");
+
             navi.getNavigationBar().add(this.postBtn);
         }else{
             navi.getNavigationBar().add(this.quitBtn);

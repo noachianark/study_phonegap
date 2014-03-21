@@ -28,13 +28,20 @@ Ext.define('Business.controller.Main', {
     },
 
     onPush:function(navi, view, eOpts){
+
         this.removeRightButton();
-        navi.getActiveItem().setNavBar(navi);
+        if(navi.getActiveItem().setNavBar){
+            navi.getActiveItem().setNavBar(navi);
+        }
+        
     },
 
     onPop:function( navi, view, eOpts ){
         this.removeRightButton();
-        navi.getActiveItem().setNavBar(navi);
+        if(navi.getActiveItem().setNavBar){
+            navi.getActiveItem().setNavBar(navi);
+        }
+        
     },
 
     removeRightButton:function(){

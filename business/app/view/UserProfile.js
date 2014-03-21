@@ -7,32 +7,32 @@ Ext.define('Business.view.UserProfile', {
     extend: 'Ext.Panel',
     alias:'widget.userprofile',
     config: {
-        cls:"user-profile",
+    	cls:"user-profile",
         fullscreen:true,
         title:"您好，X会员",
         layout:'vbox',
         items:[
-            {
-                xtype:"container",
-                layout:'hbox',
-                cls:"profiles",
-                items:[
-                    {
-                        cls:'user-avatar-inner',
-                        html:"<span class='user-avatar'></span>"
-                    },
-                    {
-                        xtype:"container",
-                        layout:{
+        	{
+        		xtype:"container",
+        		layout:'hbox',
+        		cls:"profiles",
+        		items:[
+        			{
+        				cls:'user-avatar-inner',
+        				html:"<span class='user-avatar'></span>"
+        			},
+        			{
+        				xtype:"container",
+        				layout:{
                             type:'vbox'
                         },
                         flex:1,
-                        items:[
-                            {
+        				items:[
+        					{
                                 flex:1,
-                                xtype:"container",
+        						xtype:"container",
                                 cls:'user-profile-info',
-                                layout:{
+        						layout:{
                                     type:'hbox',
                                     pack: 'center',
                                     align: 'center'
@@ -45,29 +45,29 @@ Ext.define('Business.view.UserProfile', {
                                     balance:"100"
                                 },
                                 items:[
-                                    {
+        							{
                                         itemId:'consumed',
                                         flex:1,
                                         xtype:'label',
-                                        cls:"user-account-info",
-                                        tpl:"￥{consumed}<br><span class='user-account-info-label'>已消费</span>"
-                                    },
-                                    {
+        								cls:"user-account-info",
+        								tpl:"￥{consumed}<br><span class='user-account-info-label'>已消费</span>"
+        							},
+        							{
                                         itemId:'balance',
                                         flex:1,
                                         xtype:'label',
-                                        cls:"user-account-info",
-                                        tpl:"￥{balance}<br><span class='user-account-info-label'>余额</span>"
-                                    },
-                                    {
+        								cls:"user-account-info",
+        								tpl:"￥{balance}<br><span class='user-account-info-label'>余额</span>"
+        							},
+        							{
                                         itemId:'credit',
                                         flex:1,
                                         xtype:'label',
-                                        cls:"user-account-info",
-                                        tpl:"{credit}<br><span class='user-account-info-label'>积分</span>"
-                                    }
-                                ]
-                            },
+        								cls:"user-account-info",
+        								tpl:"{credit}<br><span class='user-account-info-label'>积分</span>"
+        							}
+        						]
+        					},
 
                             {
                                 flex:1,
@@ -93,17 +93,17 @@ Ext.define('Business.view.UserProfile', {
                                 ]
                             }
 
-                        ]
-                    }
-                ]
-            },
+        				]
+        			}
+        		]
+        	},
 
 
 
             //benifit panel
-            {
-                xtype:'container',
-                cls:'credits',
+        	{
+        		xtype:'container',
+        		cls:'credits',
                 defaults: {
                     xtype: 'label',
                     margin: '5 5 5 5'
@@ -134,20 +134,20 @@ Ext.define('Business.view.UserProfile', {
                         tpl:"{left_credit}<br><span class='user-account-info-label'>剩余积分</span>"
                     }                                 
                 ]
-            },
+        	},
 
 
 
 
             //4 buttons layout
-            {
-                xtype:'container',
-                layout:{
+        	{
+        		xtype:'container',
+        		layout:{
                     type:"vbox",
                     pack:"center"
                 },
                 flex:1,
-                cls:'buttons',
+        		cls:'buttons',
                 items:[
                     {
                         xtype:"container",
@@ -200,13 +200,13 @@ Ext.define('Business.view.UserProfile', {
                         ]
                     }
                 ]
-            }
+        	}
         ]
     },
-    destroy:function(){
-        this.callParent();
-    },
-    setNavBar:function(navi){
-        //根据需要进行修改。
-    }
+	destroy:function(){
+		this.callParent();
+	},
+	setNavBar:function(navi){
+		//根据需要进行修改。
+	}
 });

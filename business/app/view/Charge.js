@@ -6,7 +6,9 @@
 Ext.define('Business.view.Charge', {
     extend: 'Ext.form.Panel',
     alias:"widget.chargepanel",
-
+    requires:[
+        'Ext.field.Number'
+    ],
     config: {
         cls:'charge',
         title:'会员充值',

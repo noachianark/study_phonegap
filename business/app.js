@@ -21,8 +21,7 @@ Ext.application({
         'Main',
         'Login',
         'MainPanel',
-        'StreamList',
-        'UserProfile'
+        'StreamList'
     ],
 
     controllers:[
@@ -31,7 +30,8 @@ Ext.application({
         'MainPanel',
         'StreamList',
         'UserProfile',
-        'Charge'
+        'Charge',
+        'Consume'
     ],
 
     models:[
@@ -39,7 +39,9 @@ Ext.application({
     ],
 
     stores:[
-        'Session'
+        'Session',
+        'Charge',
+        'User'
     ],
     
     icon: {

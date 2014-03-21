@@ -5,6 +5,10 @@
  */
 Ext.define('Business.controller.UserProfile', {
     extend: 'Ext.app.Controller',
+    requires:[
+        'Business.view.Charge',
+        'Business.view.Consume'
+    ],
 
     config: {
         refs:{
@@ -17,9 +21,6 @@ Ext.define('Business.controller.UserProfile', {
         },
         control:{
         	userview:{
-        		initialize:function(){
-        			//console.log("xxx");
-        		},
         		updatedata:"updateinfo"
         	},
         	charge:{
@@ -37,15 +38,14 @@ Ext.define('Business.controller.UserProfile', {
         }
     },
 
-    chargeAction:function(){
-        console.log('asdasd');
-        var charge = Ext.create('Business.view.Charge');
-        //charge.userinfo = this.userinfo;
-        this.getNavi().push([charge]);    	
+    chargeAction:function(btn){
+    	var charge = Ext.create('Business.view.Charge');
+    	this.getNavi().push([charge]);
     },
 
-    consumeAction:function(){
-
+    consumeAction:function(btn){
+        var consume = Ext.create('Business.view.Consume');
+        this.getNavi().push([consume]);
     },
 
     withdrawAction:function(){
@@ -58,6 +58,7 @@ Ext.define('Business.controller.UserProfile', {
 
     //when view apply setData function , call this function to fill the data to children fields
     updateinfo:function(me, newData, eOpts){
+        console.log(newData);
     	this.getUserview().userinfo = newData;
 		this.getUserview().down('#balance').setData({balance:newData.get('balance')});
 		this.getUserview().down('#credit').setData({credit:newData.get('credit')});
