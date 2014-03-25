@@ -16,7 +16,7 @@ Ext.define('Business.controller.Consume', {
         	panel:"consumepanel",
             consumefield:"consumepanel #consumefield",
             cardpayfield:'consumepanel #cardpayfield',
-            cashpayfield:'consumepanel #cashpayfield',
+            cashpayfield:'consumepanel #cashpay',
             consumeBtn:'consumepanel #consume',
             returnBtn:'consumesuccess #returnBtn',
             successpanel:'consumesuccess'
@@ -97,42 +97,43 @@ Ext.define('Business.controller.Consume', {
     		Ext.Msg.alert("提示信息",msg);
     	}
         self.setValue(newValue);
-        //this.getCashpayfield().setValue(cash);
-        this.getCashpayfield().dom.value(cash);
+        this.getCashpayfield().setData({cashpay:cash});
+        //this.getCashpayfield().dom.value(cash);
         var bal = (Number(this.balance) - Number(newValue)).toFixed(1);
         this.getPanel().down("#balance").setData({balance:bal});
     },
 
     cashpayFieldChange:function(self, newValue, oldValue, eOpts){
-        var msg = "";
-        newValue = Number(newValue).toFixed(1);
-        var card = (Number(this.payfor) - Number(newValue)).toFixed(1);
-        if(Number(newValue) > Number(this.payfor)){
-            newValue = this.payfor;
-            card = 0;
-        }
+        // var msg = "";
+        // newValue = Number(newValue).toFixed(1);
+        // var card = (Number(this.payfor) - Number(newValue)).toFixed(1);
+        // if(Number(newValue) > Number(this.payfor)){
+        //     newValue = this.payfor;
+        //     card = 0;
+        // }
         
-        if(Number(newValue) + Number(this.balance) < Number(this.consume)){
-            msg+="余额不足，请补充现金<br>";
-            newValue = (Number(this.consume) - Number(this.balance)).toFixed(1);
-        }
+        // if(Number(newValue) + Number(this.balance) < Number(this.consume)){
+        //     msg+="余额不足，请补充现金<br>";
+        //     newValue = (Number(this.consume) - Number(this.balance)).toFixed(1);
+        // }
 
-        if(Number(newValue) < 0){
-            msg+="支付金额不能为负数.<br>";
-            newValue = Math.abs(Number(newValue));
-        }
+        // if(Number(newValue) < 0){
+        //     msg+="支付金额不能为负数.<br>";
+        //     newValue = Math.abs(Number(newValue));
+        // }
 
-        if(msg.length > 0){
-            Ext.Msg.alert("提示信息",msg);
-        }
+        // if(msg.length > 0){
+        //     Ext.Msg.alert("提示信息",msg);
+        // }
 
 
 
-        self.setValue(newValue);
-        //this.getCardpayfield().setValue(card);
-        this.getCardpayfield().dom.value(card);
-        var bal = (Number(this.balance) - Number(card)).toFixed(1);
-        this.getPanel().down("#balance").setData({balance:bal});
+        // self.setValue(newValue);
+        // console.log(this.getCardpayfield().element.dom);
+        // //this.getCardpayfield().setValue(card);
+        // //this.getCardpayfield().element.dom.value(card);
+        // var bal = (Number(this.balance) - Number(card)).toFixed(1);
+        // this.getPanel().down("#balance").setData({balance:bal});
 
     },
 
@@ -146,11 +147,11 @@ Ext.define('Business.controller.Consume', {
     		//余额不足
     		this.getCardpayfield().setValue(Number(this.balance).toFixed(1));
     		var cashpay = (Number(payfor) - Number(this.balance)).toFixed(1);
-    		this.getCashpayfield().setValue(cashpay);
+    		this.getCashpayfield().setData({cashpay:cashpay});
     		bal = 0;
     	}else{
     		//余额充足
-			this.getCashpayfield().setValue(0);
+			this.getCashpayfield().setData({cashpay:0});
 			var cardpay = Number(payfor).toFixed(1);
 			this.getCardpayfield().setValue(cardpay);
     		

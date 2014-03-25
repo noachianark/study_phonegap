@@ -43,15 +43,15 @@ Ext.define('Business.view.Consume', {
 						itemId:'cardpayfield',
 						name:'cardpay',
 						label:'余额支付'
-					},
-					{
-						xtype:'numberfield',
-						itemId:'cashpayfield',
-						name:'cashpay',
-						label:'现金支付'
 					}
 				]
 			},
+			{
+				xtype:'label',
+				itemId:'cashpay',
+				name:'cashpay',
+				tpl:'现金支付:{cashpay}'
+			},		
 			{
 				xtype:'label',
 				itemId:'credit',
