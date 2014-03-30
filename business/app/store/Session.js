@@ -7,12 +7,13 @@ Ext.define('Business.store.Session', {
     extend: 'Ext.data.Store',
 
     config: {
+    	storeId:'session',
         model: 'Business.model.Session',
         autoLoad: true,
           
         proxy: {
          type: 'localstorage',
-         id  : 'userinfo'
+         id  : 'loginuser'
         }
     }
 });

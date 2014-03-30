@@ -5,7 +5,10 @@
  */
 Ext.define('Business.controller.Main', {
     extend: 'Ext.app.Controller',
-
+    requires:[
+        'Business.view.QuickLogin',
+        'Business.view.Login'
+    ],
     config: {
     	refs:{
     		main:"main"
@@ -24,7 +27,12 @@ Ext.define('Business.controller.Main', {
 
     initAction:function(){
         this.backButtonHandle();
-        Ext.Viewport.add([{xtype:"loginview"}]);
+        var userinfo = Ext.getStore('session').load().getAt(0);
+        if(null!=userinfo){
+            Ext.Viewport.add([{xtype:'quicklogin'}]);
+        }else{
+            Ext.Viewport.add([{xtype:"loginview"}]);
+        }
     },
 
     onPush:function(navi, view, eOpts){

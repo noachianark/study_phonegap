@@ -41,9 +41,6 @@ Ext.define('Business.view.UserProfile', {
                                     xtype: 'component',
                                     margin: '5 5 5 5'
                                 },
-                                data:{
-                                    balance:"100"
-                                },
                                 items:[
         							{
                                         itemId:'consumed',
@@ -86,9 +83,6 @@ Ext.define('Business.view.UserProfile', {
                                     {
                                         flex:1,
                                         html:"<span class='user-card-type-label'>普卡</span>"
-                                    },
-                                    {
-                                        flex:2
                                     }
                                 ]
                             }

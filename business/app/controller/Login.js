@@ -17,82 +17,94 @@ Ext.define('Business.controller.Login', {
             logBtn:"loginview #logInButton",
             logfield:"loginview fieldset",
             loginview:"loginview",
-            main:'main'
+            main:'main',
+            verifyimg:'loginview #verifyImg',
+            quicklogin:'quicklogin',
+            quickfield:"quicklogin fieldset",
+            quickloginbtn:"quicklogin #quickLoginBtn",
+            switchlogin:"quicklogin #switchlogin"
     	},
 
         control:{
-        	loginview:{
-        		initialize:"inita"
-        	},
             logBtn:{
                 tap:'onLoginBtnTap'
+            },
+            verifyimg:{
+                tap:function(self){
+                    self.setSrc(basePath + 'verify-code.jsp?date=' + new Date().getTime());
+                }
+            },
+            quickloginbtn:{
+                tap:'onLoginBtnTap'
+            },
+            quicklogin:{
+                initialize:"inita"
             }
         }
 
     },
 
     inita:function(){
-        //1、查询商家的列表。
-
-        //2、获取本地local storage信息自动选中商家列表和用户名。
-        var userinfo = Ext.getStore('Session');
-        if(null!=userinfo.getAt(0)){
-            var info = userinfo.getAt(0);
-            this.getLogfield().getComponent("username").setValue(info.get("username"));
-        }
-
+        //获取本地local storage。
+        var userinfo = Ext.getStore('session').load().getAt(0);
+        this.getQuickfield().getComponent('nameLabel').setData({username:userinfo.get('name')});
     },
 
     onLoginBtnTap:function(btn){
         btn.disable();
         var me = this;
+        if(btn.itemId == 'quickLoginBtn'){
+
+        }
         var values = this.getLoginview().getValues();
         var valid = this.validateCredentials(values);
-        Ext.Viewport.setMasked({
-            xtype: 'loadmask',
-            message: '登陆中请稍后...'
-        });
+
 
         if(valid){
-
-            //发送请求，然后在回调函数中处理返回的用户信息
-
-            var sessionInfo = Ext.getStore('Session');
-            sessionInfo.removeAll();
-            sessionInfo.sync();
-
-            var userinfo = new Business.model.Session({
-                username:values.username,
-                password:values.password,
-                business_id:"1",
-                shop_id:"1"
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: '登陆中请稍后...'
             });
-
-            sessionInfo.add(userinfo);
-            sessionInfo.sync();
-
-            //。。。。。。。。。。。。。。。
-
-            var task = Ext.create('Ext.util.DelayedTask', function() {
-
-                me.getLoginview().destroy();
-
-                // Ext.Viewport.add([{xtype:'mainpanel'}]);
-                // Ext.Viewport.animateActiveItem("mainpanel",{type:"slide",direction:"left"});
-                //Ext.Viewport.add([{xtype:"menuview"}]);
-                //Ext.Viewport.animateActiveItem("menuview", { type: 'slide', direction: 'left' });
-                //Ext.Viewport.animateActiveItem("mainpanel",{type:"slide",direction:"left"});
-                this.getMain().push({xtype:'mainpanel'});
-                this.getMain().getNavigationBar().setTitle('已发送资讯');
-                Ext.Viewport.setMasked(false);
-            }, this);
-
-            task.delay(2000);
-
+            //发送请求，然后在回调函数中处理返回的用户信息
+            POperatorAction.login(values.verifycode,values.mall,values.username,btoa(values.password),function(actionResult){
+                if(actionResult.success){
+                    me.loginSucces(actionResult.data,values.mall);
+                }else{
+                    me.loginFailed(actionResult.message,btn);
+                }
+            });
         }else{
-            Ext.Viewport.setMasked(false);
+            //Ext.Viewport.setMasked(false);
             btn.enable();
         }
+    },
+
+    loginSucces:function(values,domain){
+        var sessionInfo = Ext.getStore('session');
+        sessionInfo.removeAll();
+        sessionInfo.sync();
+
+        //var userinfo = new Business.model.Session(actionResult.data);
+        var userinfo = new Business.model.Session(values);
+        console.log(values.mall);
+        userinfo.set('domain',domain);
+        newRecords=sessionInfo.add(userinfo);
+        Ext.each(newRecords, function(record) {
+            record.phantom = true;
+        });
+        sessionInfo.sync();
+
+        this.getLoginview().destroy();
+        this.getMain().push({xtype:'mainpanel'});
+        this.getMain().getNavigationBar().setTitle('已发送资讯'); 
+        
+        Ext.Viewport.setMasked(false);
+    },
+
+    loginFailed:function(message,btn){
+        Ext.Msg.alert("信息",message);
+        Ext.Viewport.setMasked(false);
+        btn.enable();
     },
 
     validateCredentials:function(values){
@@ -104,8 +116,12 @@ Ext.define('Business.controller.Login', {
             Ext.Msg.alert('信息', '请输入密码');
             return false;
         }
+        if(values.verifycode == "" || values.verifycode == null){
+            Ext.Msg.alert('信息','请输入验证码');
+            return false;
+        }
         if (values.mall == "" || values.mall == null) {
-            Ext.Msg.alert('信息', '请选择商家信息');
+            Ext.Msg.alert('信息', '请输入商家域名');
             return false;
         }
         return true;

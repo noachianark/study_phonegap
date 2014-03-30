@@ -6,7 +6,8 @@
 Ext.define('Business.controller.Charge', {
     extend: 'Ext.app.Controller',
     requires:[
-        'Business.view.ChargeSuccess'
+        'Business.view.ChargeSuccess',
+        'Business.store.Charge'
     ],
     config: {
         refs:{
@@ -43,7 +44,7 @@ Ext.define('Business.controller.Charge', {
         Ext.Viewport.setMasked({
             xtype: 'loadmask',
             message: '充值中请稍后...'
-        });        
+        });
 
         store.load({
             scope:this,
@@ -80,14 +81,21 @@ Ext.define('Business.controller.Charge', {
 
     successful:function( self, newData, eOpts){
         console.log("lalal ssss");
+        
+        var data = this.getUserprofile().userinfo.getData();
+        data.balance = newData.balance;
+
+        var userinfo = Ext.create('Business.model.User');
+        userinfo.setData(data);
+        this.getUserprofile().setData(userinfo);
+
         this.getSuccesspanel().down('#charge-balance').setData({balance:newData.balance});
         this.getSuccesspanel().down('#charge-username').setData({username:newData.username});
     },
 
     confirmAction:function(){
-        this.getNavi().reset();
+        this.getNavi().pop(2);
     },
-
 
     fastchargeAction:function(btn){
         this.getChargefield().setValue(btn.getData());

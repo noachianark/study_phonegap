@@ -8,15 +8,20 @@ Ext.define('Business.model.Session', {
 
     config: {
         fields: [
-            {name: 'username', type: 'string'},
-            {name: 'password', type:'string'},
-            {name: 'business_id', type:"int"},
-            {name: 'shop_id',type:"int"}
-        ],
-
-        validations: [
-            {type: 'length',  field: 'username', min : 1},
-            {type: 'length',  field: 'password', min : 1}
+            {name: 'accountName', type:'string' },
+            {name: 'name',        type:'string' },
+            {name: 'businessId',  type:"int"    },
+            {name: 'shopId',      type:"int"    },
+            {name: 'actionCodes',        type:"auto"   },
+            {name: 'allowPublishCoupons',type:'boolean'},
+            {name: 'allowPublishNews',   type:'boolean'},
+            {name:'domain',type:'string'}
         ]
+        // ,
+
+        // validations: [
+        //     {type: 'length',  field: 'username', min : 1},
+        //     {type: 'length',  field: 'password', min : 1}
+        // ]
     }
 });

@@ -69,8 +69,6 @@ Ext.define('Business.view.MainPanel', {
         navi.getNavigationBar().setTitle(this.getActiveItem().label);
 
         if(this.getActiveItem().isXType('streamlist')){
-            console.log("nani?????");
-
             navi.getNavigationBar().add(this.postBtn);
         }else{
             navi.getNavigationBar().add(this.quitBtn);

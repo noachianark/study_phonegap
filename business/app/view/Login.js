@@ -42,15 +42,32 @@ Ext.define('Business.view.Login', {
                         required: true
                     },
                     {
-                        xtype: 'selectfield',
-                        placeHolder: '请选择商家',
-                        name:"mall",
-                        options: [
-                            {},
-                            {text: 'First Option',  value: 'first'},
-                            {text: 'Second Option', value: 'second'},
-                            {text: 'Third Option',  value: 'third'}
-                        ]
+                        xtype : 'img',
+                        itemId : 'verifyImg',
+                        width : 80,
+                        border : false,
+                        height : 30,
+                        cls:'verify-code',
+                        src : basePath + 'verify-code.jsp?date=' + new Date().getTime()
+                    },
+                    {
+                        xtype:'label',
+                        html:'看不清？点击图片刷新'
+                    },
+                    {
+                        xtype:'textfield',
+                        placeHolder:'验证码',
+                        itemId:'verifyCode',
+                        name:'verifycode',
+                        cls:'textfield',
+                        required:true
+                    },
+                    {
+                        xtype: 'textfield',
+                        placeHolder: '商家域名',
+                        required:true,
+                        itemId:'domain',
+                        name:"mall"
                     }
                 ]
             },
@@ -59,7 +76,7 @@ Ext.define('Business.view.Login', {
                 itemId: 'logInButton',
                 cls:"button",
                 ui: 'action',
-                text: '登 陆'
+                text: '登 录'
             }
     	]
     }
