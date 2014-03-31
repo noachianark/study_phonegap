@@ -21,19 +21,34 @@ Ext.Loader.addClassPathMappings({
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
+  "Business.controller.Charge": [],
+  "Business.controller.Consume": [],
   "Business.controller.Login": [],
   "Business.controller.Main": [],
   "Business.controller.MainPanel": [],
   "Business.controller.StreamList": [],
   "Business.controller.UserProfile": [],
+  "Business.controller.Wizard": [],
   "Business.model.Session": [],
   "Business.model.User": [],
   "Business.plugin.PullRefreshPanel": [],
+  "Business.store.Charge": [],
+  "Business.store.Consume": [],
+  "Business.store.Images": [],
   "Business.store.Session": [],
+  "Business.store.User": [],
+  "Business.view.Charge": [],
+  "Business.view.ChargeSuccess": [],
+  "Business.view.Consume": [],
+  "Business.view.ConsumeSuccess": [],
+  "Business.view.Exchange": [],
+  "Business.view.InfoWizards.ImageItem": [],
+  "Business.view.InfoWizards.ImagesBuffer": [],
   "Business.view.Login": [],
   "Business.view.Main": [],
   "Business.view.MainPanel": [],
   "Business.view.PostItem": [],
+  "Business.view.QuickLogin": [],
   "Business.view.StreamList": [],
   "Business.view.UserProfile": [],
   "Ext.AbstractComponent": [],
@@ -761,17 +776,43 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
+  "Business.controller.Charge": [],
+  "Business.controller.Consume": [],
   "Business.controller.Login": [],
   "Business.controller.Main": [],
   "Business.controller.MainPanel": [],
   "Business.controller.StreamList": [],
   "Business.controller.UserProfile": [],
+  "Business.controller.Wizard": [],
   "Business.model.Session": [],
   "Business.model.User": [],
   "Business.plugin.PullRefreshPanel": [
     "plugin.pullrefreshpanel"
   ],
+  "Business.store.Charge": [],
+  "Business.store.Consume": [],
+  "Business.store.Images": [],
   "Business.store.Session": [],
+  "Business.store.User": [],
+  "Business.view.Charge": [
+    "widget.chargepanel"
+  ],
+  "Business.view.ChargeSuccess": [
+    "widget.chargesuccess"
+  ],
+  "Business.view.Consume": [
+    "widget.consumepanel"
+  ],
+  "Business.view.ConsumeSuccess": [
+    "widget.consumesuccess"
+  ],
+  "Business.view.Exchange": [],
+  "Business.view.InfoWizards.ImageItem": [
+    "widget.imageitem"
+  ],
+  "Business.view.InfoWizards.ImagesBuffer": [
+    "widget.imagesbuffer"
+  ],
   "Business.view.Login": [
     "widget.loginview"
   ],
@@ -783,6 +824,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Business.view.PostItem": [
     "widget.postitem"
+  ],
+  "Business.view.QuickLogin": [
+    "widget.quicklogin"
   ],
   "Business.view.StreamList": [
     "widget.streamlist"

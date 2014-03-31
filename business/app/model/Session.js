@@ -17,11 +17,5 @@ Ext.define('Business.model.Session', {
             {name: 'allowPublishNews',   type:'boolean'},
             {name:'domain',type:'string'}
         ]
-        // ,
-
-        // validations: [
-        //     {type: 'length',  field: 'username', min : 1},
-        //     {type: 'length',  field: 'password', min : 1}
-        // ]
     }
 });

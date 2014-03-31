@@ -51,6 +51,41 @@
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
+    <script type="text/javascript">
+	var isDev = (window.location.href.indexOf('localhost')!=-1)? true : false;
+    var basePath = window.location.href.substring(0, window.location.href.indexOf('phone/business'));
+	var contextPath = basePath + 'phone/business/';
+    var djn = 'djn/directprovider';
+    var version = 1;
+    var versionSub = 2;
+    var versionUpdate = 0;
+
+    function getVersionNumber(){
+        return version*100 + versionSub*10 + versionUpdate;
+    }
+
+    function checkVersionNumber(){
+        if(window.userInfo){
+            var versionNumber = this.getVersionNumber();
+            if(!userInfo.versionNumber || userInfo.versionNumber < versionNumber){
+                window.localStorage.removeItem('userInfo');
+                window.userInfo = undefined;
+                Ext.Msg.alert('信息', '当前版本过低，您需要重新登录.', function(){
+                    
+                });
+            }
+        }
+    }
+
+    function baseUrl() {
+        Ext.app.PROVIDER_BASE_URL = basePath + djn;
+        Ext.app.REMOTING_API.url = Ext.app.PROVIDER_BASE_URL;
+
+        if (Ext.direct.Manager.getProvider('remoteProvider')) {
+            Ext.direct.Manager.getProvider('remoteProvider').setUrl(Ext.app.REMOTING_API.url);
+        }   
+    }    
+    </script>
 </head>
 <body>
     <div id="appLoadingIndicator">

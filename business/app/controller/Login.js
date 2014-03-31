@@ -22,7 +22,7 @@ Ext.define('Business.controller.Login', {
             quicklogin:'quicklogin',
             quickfield:"quicklogin fieldset",
             quickloginbtn:"quicklogin #quickLoginBtn",
-            switchlogin:"quicklogin #switchlogin"
+            switchlogin:"quicklogin #switchLogin"
     	},
 
         control:{
@@ -39,6 +39,9 @@ Ext.define('Business.controller.Login', {
             },
             quicklogin:{
                 initialize:"inita"
+            },
+            switchlogin:{
+                tap:'onChangeAccount'
             }
         }
 
@@ -46,17 +49,34 @@ Ext.define('Business.controller.Login', {
 
     inita:function(){
         //获取本地local storage。
-        var userinfo = Ext.getStore('session').load().getAt(0);
-        this.getQuickfield().getComponent('nameLabel').setData({username:userinfo.get('name')});
+        //var userinfo = Ext.getStore('session').load().getAt(0);
+
+        this.getQuickfield().getComponent('nameLabel').setData({username:Business.app.userinfo.get('name')});
+    },
+
+    onChangeAccount:function(btn){
+
+        btn.disable();
+        this.getQuicklogin().destroy();
+        var panel = Ext.create('widget.loginview');
+
+        Ext.Viewport.add([panel]);
+        panel.show();
+        //btn.enable();
     },
 
     onLoginBtnTap:function(btn){
         btn.disable();
         var me = this;
-        if(btn.itemId == 'quickLoginBtn'){
-
+        var values ;
+        if(btn.getItemId() == 'quickLoginBtn'){
+            values = this.getQuicklogin().getValues();
+            var userinfo = Ext.getStore('session').load().getAt(0);
+            values.mall = userinfo.get('domain');
+            values.username = userinfo.get('accountName');
+        }else{
+            values = this.getLoginview().getValues();
         }
-        var values = this.getLoginview().getValues();
         var valid = this.validateCredentials(values);
 
 
@@ -83,18 +103,24 @@ Ext.define('Business.controller.Login', {
         var sessionInfo = Ext.getStore('session');
         sessionInfo.removeAll();
         sessionInfo.sync();
+        Business.app.userinfo = null;
 
         //var userinfo = new Business.model.Session(actionResult.data);
         var userinfo = new Business.model.Session(values);
-        console.log(values.mall);
         userinfo.set('domain',domain);
         newRecords=sessionInfo.add(userinfo);
         Ext.each(newRecords, function(record) {
             record.phantom = true;
         });
         sessionInfo.sync();
-
-        this.getLoginview().destroy();
+        Business.app.userinfo = userinfo;
+        if(this.getLoginview()){
+            this.getLoginview().destroy();
+        }
+        if(this.getQuicklogin()){
+            this.getQuicklogin().destroy();
+        }
+        
         this.getMain().push({xtype:'mainpanel'});
         this.getMain().getNavigationBar().setTitle('已发送资讯'); 
         

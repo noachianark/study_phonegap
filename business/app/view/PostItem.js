@@ -16,11 +16,17 @@ Ext.define('Business.view.PostItem', {
     	title: {
             cls: 'item-title'
         },
-        time:{
-        	cls:'item-time'
+        publishDate:{
+        	cls:'item-publish-date'
         },
-        description:{
-        	cls:'item-description'
+        content:{
+        	cls:'item-content'
+        },
+        pictureUrl:{
+        	cls:'item-picture',
+        	xtype:'img',
+        	width:60,
+        	height:60
         },
 
         dataMap: {
@@ -28,12 +34,15 @@ Ext.define('Business.view.PostItem', {
                 setHtml: 'title'
             },
 
-            getTime: {
-                setHtml: 'time'
+            getPublishDate: {
+                setHtml: 'publishDate'
             },
 
-            getDescription: {
-                setHtml: 'description'
+            getContent: {
+                setHtml: 'content'
+            },
+            getPictureUrl:{
+            	setSrc:'pictureUrl'
             }
         }
     },
@@ -52,11 +61,25 @@ Ext.define('Business.view.PostItem', {
 		}
 	},
 
-	applyTime: function(config) {
-		return Ext.factory(config, Ext.Component, this.getTime());
+	applyPictureUrl: function(config) {
+		return Ext.factory(config, Ext.Component, this.getPictureUrl());
 	},
 
-	updateTime: function(newTime, oldTime) {
+	updatePictureUrl: function(newTitle, oldTitle) {
+		if (newTitle) {
+			this.add(newTitle);
+		}
+
+		if (oldTitle) {
+			this.remove(oldTitle);
+		}
+	},
+
+	applyPublishDate: function(config) {
+		return Ext.factory(config, Ext.Component, this.getPublishDate());
+	},
+
+	updatePublishDate: function(newTime, oldTime) {
 		if (newTime) {
 			this.add(newTime);
 		}
@@ -66,11 +89,11 @@ Ext.define('Business.view.PostItem', {
 		}
 	},
 
-	applyDescription: function(config) {
-		return Ext.factory(config, Ext.Component, this.getDescription());
+	applyContent: function(config) {
+		return Ext.factory(config, Ext.Component, this.getContent());
 	},
 
-	updateDescription: function(newDescription, oldDescription) {
+	updateContent: function(newDescription, oldDescription) {
 		if (newDescription) {
 			this.add(newDescription);
 		}

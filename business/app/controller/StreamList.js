@@ -7,7 +7,8 @@ Ext.define('Business.controller.StreamList', {
     extend: 'Ext.app.Controller',
     requires:[
     	'Business.view.InfoWizards.ImagesBuffer',
-    	'Business.view.InfoWizards.ImageItem'
+    	'Business.view.InfoWizards.ImageItem',
+    	'Ext.ActionSheet'
     ],
     config: {
         refs:{
@@ -18,8 +19,15 @@ Ext.define('Business.controller.StreamList', {
         control:{
         	postBtn:{
         		tap:'popActionSheet'
+        	},
+        	list:{
+        		initialize:"initAction"
         	}
         }
+    },
+
+    initAction:function(){
+    	this.getList().down('dataview').getStore().load();
     },
 
     popPictureSheet:function(){
@@ -188,7 +196,6 @@ Ext.define('Business.controller.StreamList', {
 
 	postInfomation:function(type,image){
 		var wizard = Ext.create('widget.imagesbuffer');
-
 		if(type=="news"){
 			wizard.setTitle('发布新闻信息');
 		}else{

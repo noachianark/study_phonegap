@@ -71,9 +71,9 @@ Ext.define('Business.view.QuickLogin', {
         		text:'登 录'
         	},
         	{
-        		xtype:'label',
+        		xtype:'button',
         		itemId:'switchLogin',
-        		html:'切换账号'
+        		text:'切换账号'
         	}
         ]
     }

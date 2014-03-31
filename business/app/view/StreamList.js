@@ -42,71 +42,34 @@ Ext.define('Business.view.StreamList', {
 				autoScroll:true,
 				autoLoad:true,
 				loadingText:"loading...",
-				store: {
-				    fields: ['title','time','description'],
-				    data: [
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},				        
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-						{title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},				        
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Forest',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Cowper',time:'03/28/2014',description:'chachacha'},
-				        {title: 'Everett',time:'03/28/2014',description:'chachacha'},
-				        {title: 'University',time:'03/28/2014',description:'chachacha'}				        
-				    ]
-				}     		
+				store:'Stream',
+				infinite: true,
+				plugins:[
+					// {
+		   //              ptype: 'pullrefresh',
+		   //              refreshFn: function(callback, plugin) {
+		   //                  console.log( 'me1' );
+		   //                  if (navigator.geolocation) {
+		   //                      navigator.geolocation.getCurrentPosition(function(position) {
+		   //                          console.log( 'me2' );
+		   //                          Rad.stores.games.getProxy().extraParams.lat  = position.coords.latitude;
+		   //                          Rad.stores.games.getProxy().extraParams.long  = position.coords.longitude;  
+		   //                          var store = plugin.list.getStore();
+		   //                          store.load(function(records, operation, success) {
+		   //                              callback.call(plugin);
+		   //                              console.log( 'me3' );
+		   //                          });
+		   //                      }); 
+		   //                  }
+		   //              }
+		   //          },
+			        {
+			            xclass:'Ext.plugin.ListPaging',
+			            autoPaging: true,
+			            // These override the text; use CSS for styling
+			            loadMoreText: '加载更多...'
+			        }
+			    ]
 			}
         ]
 

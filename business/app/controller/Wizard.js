@@ -30,6 +30,7 @@ Ext.define('Business.controller.Wizard', {
 
     initAction:function(){
     	var me = this;
+        console.log("initAction");
     	this.getBuffer().store = Ext.create("Ext.data.Store",{
     		fields:['src'],
     		listeners:{

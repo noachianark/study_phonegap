@@ -4,10 +4,7 @@
  * Description
  */
 Ext.define('Business.view.Exchange', {
-    extend: 'extendsClass',
-    requires: [
-        'requiresClass'
-    ],
+    extend: 'Ext.Panel',
 
     config: {
     	cls:'exchange',

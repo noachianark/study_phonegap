@@ -1,2 +1,2 @@
 // @tag full-page
-// @require G:\phonegap\github_phonegap\business\app.js
+// @require C:\workspaces\eclipse\vipmonk\WebContent\phone\business\app.js

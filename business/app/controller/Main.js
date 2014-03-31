@@ -22,13 +22,11 @@ Ext.define('Business.controller.Main', {
         }
     },
 
-
-
-
     initAction:function(){
         this.backButtonHandle();
         var userinfo = Ext.getStore('session').load().getAt(0);
         if(null!=userinfo){
+            Business.app.userinfo = new Business.model.Session(userinfo.getData());
             Ext.Viewport.add([{xtype:'quicklogin'}]);
         }else{
             Ext.Viewport.add([{xtype:"loginview"}]);
@@ -36,12 +34,10 @@ Ext.define('Business.controller.Main', {
     },
 
     onPush:function(navi, view, eOpts){
-
         this.removeRightButton();
         if(navi.getActiveItem().setNavBar){
             navi.getActiveItem().setNavBar(navi);
         }
-        
     },
 
     onPop:function( navi, view, eOpts ){
@@ -49,7 +45,6 @@ Ext.define('Business.controller.Main', {
         if(navi.getActiveItem().setNavBar){
             navi.getActiveItem().setNavBar(navi);
         }
-        
     },
 
     removeRightButton:function(){
