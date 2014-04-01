@@ -47,18 +47,35 @@ Ext.define('Business.controller.MainPanel', {
         //开启相机并扫描，返回结果后转至showUserProfile。
         //根据用户ID调用store,返回数据后，调用user profile页面。
         var me = this;
+        //Ext.getStore("User").load();
         var store = Ext.create("Business.store.User");
+        // store.getProxy().setExtraParams({
+
+        // });
         store.load({
+            params:{
+                businessId:Business.app.userinfo.get('businessId')+'',
+                qrString:'8c4624d92ee8c457ff06f289c7866db74d0c86fb8739b303' 
+            },
             scope:this,
             callback: function(records, operation, success){
                 if (success) {
-                    me.showUserProfile(records);
+                    console.log("xxx");
+                    //me.showUserProfile(records);
                 } else {
                     console.log('error');
                 }                
             }
         });
-
+        // PVipCardAction.getVipCardByQRString(Business.app.userinfo.get('businessId')+'','8c4624d92ee8c457ff06f289c7866db74d0c86fb8739b303',function(actionResult){
+        //     if(actionResult.success){
+        //         console.log(actionResult.data);
+        //         //me.loginSucces(actionResult.data,values.mall);
+        //     }else{
+        //         console.log(actionResult.message);
+        //         //me.loginFailed(actionResult.message,btn);
+        //     }
+        // });
         
     },
 

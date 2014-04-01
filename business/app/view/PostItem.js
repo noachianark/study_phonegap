@@ -13,94 +13,39 @@ Ext.define('Business.view.PostItem', {
 
     	layout:"vbox",
 
-    	title: {
-            cls: 'item-title'
-        },
-        publishDate:{
-        	cls:'item-publish-date'
-        },
-        content:{
-        	cls:'item-content'
-        },
-        pictureUrl:{
-        	cls:'item-picture',
-        	xtype:'img',
-        	width:60,
-        	height:60
-        },
-
-        dataMap: {
-            getTitle: {
-                setHtml: 'title'
-            },
-
-            getPublishDate: {
-                setHtml: 'publishDate'
-            },
-
-            getContent: {
-                setHtml: 'content'
-            },
-            getPictureUrl:{
-            	setSrc:'pictureUrl'
-            }
-        }
+    	items:[
+    		{
+    			xtype:'label',
+    			itemId:'title',
+    			cls:'item-title'
+    		},
+    		{
+    			xtype:'label',
+    			itemId:'content',
+    			cls:'item-content'
+    		},    		
+    		{
+    			xtype:'img',
+    			itemId:'img',
+    			cls:'item-picture'
+    		},
+    		{
+    			xtype:'label',
+    			itemId:'date',
+    			cls:'item-publish-date',
+    			style:{
+    				'text-align':'right'
+    			}
+    		}
+    	]
     },
 
-	applyTitle: function(config) {
-		return Ext.factory(config, Ext.Component, this.getTitle());
-	},
-
-	updateTitle: function(newTitle, oldTitle) {
-		if (newTitle) {
-			this.add(newTitle);
-		}
-
-		if (oldTitle) {
-			this.remove(oldTitle);
-		}
-	},
-
-	applyPictureUrl: function(config) {
-		return Ext.factory(config, Ext.Component, this.getPictureUrl());
-	},
-
-	updatePictureUrl: function(newTitle, oldTitle) {
-		if (newTitle) {
-			this.add(newTitle);
-		}
-
-		if (oldTitle) {
-			this.remove(oldTitle);
-		}
-	},
-
-	applyPublishDate: function(config) {
-		return Ext.factory(config, Ext.Component, this.getPublishDate());
-	},
-
-	updatePublishDate: function(newTime, oldTime) {
-		if (newTime) {
-			this.add(newTime);
-		}
-
-		if (oldTime) {
-			this.remove(oldTime);
-		}
-	},
-
-	applyContent: function(config) {
-		return Ext.factory(config, Ext.Component, this.getContent());
-	},
-
-	updateContent: function(newDescription, oldDescription) {
-		if (newDescription) {
-			this.add(newDescription);
-		}
-
-		if (oldDescription) {
-			this.remove(oldDescription);
-		}
+	updateRecord:function(record){
+		var me = this;
+		me.down('#title').setHtml(record.get('title'));
+		me.down('#date').setHtml(record.get('publishDate'));
+		me.down('#img').setSrc(basePath + record.get('pictureUrl'));
+		me.down('#content').setHtml(record.get('content'));
 	}
 
 });

@@ -4,23 +4,23 @@
  * Description
  */
 Ext.define('Business.store.User', {
-    extend: 'Ext.data.Store',
-    requires:[
+    extend : 'Business.store.BaseStore',
+    requires : [
     	'Business.model.User'
     ],
-    config: {
-        model:'Business.model.User',
-        data : 
-			{
-				username: "gospelark",
-				rebate: "5",
-				credit:"249",
-				balance:"49",
-				consumed:'37',
-				discount:'10',
-				rate:'1',
-				left_credit:'159'
+    config : {
+        model : 'Business.model.User',
+		autoLoad : false,
+		clearOnPageLoad: false,
+		proxy : {
+			enablePagingParams:false,
+			type : 'direct',
+			directFn : PVipCardAction.getVipCardIdByQrString,
+			//directFn : PMessageAction.findNews,
+			reader : {
+				type : 'json',
+				rootProperty : 'records'
 			}
-		
+		}
     }
 });

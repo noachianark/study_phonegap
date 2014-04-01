@@ -3,6 +3,10 @@ html{
 	font-size: 20px;
 	font-weight: bold;
 }
+body{
+	background:url('../images/background.jpg') no-repeat;
+	background-size: 100% 100%;
+}
 
 /* login panel css styles */
 .loginPanel .fieldSet{
@@ -24,6 +28,9 @@ html{
 
 
 /* main panel css style*/
+.mainpanel{
+	background-color: rgba(0,0,0,0);
+}
 .mainpanel .scanBtn{
 	background-color: #157efb;
 }
@@ -46,6 +53,26 @@ html{
 	width: 100%;
 	height: 100%;
 }
+
+.x-button-icon.x-shown.icon-home{
+	color:#edb61f;
+	-webkit-text-stroke-color: #edb61f;
+}
+.x-button-icon.x-shown.icon-newspaper{
+	color:#edb61f;
+	-webkit-text-stroke-color: #edb61f;
+}
+.x-tab.x-tab-active .x-button-icon:before{
+	color: #edb61f;
+}
+
+.x-tabbar-dark.x-tabbar.x-dock-item.x-docked-bottom{
+	background-color: rgba(20,20,20,0.9);
+	border:0px;
+}
+.x-tab-active {
+	background-color: rgba(0,0,0,0);
+}
 /* end of main panel css style*/
 
 
@@ -53,22 +80,38 @@ html{
 
 /* stream list css*/
 .stream-list{
-	background-color: #eef2f5;
+	background-color: rgba(0,0,0,0);
+	color: #ffffff;
 }
 .stream-list .itemlist{
 	height: 100%;
 }
 .stream-list .post-item{
-   	margin: 20px;
-   	min-height: 400px;
-   	background-color: #fff;
-   	border-radius: 10px;
+   	margin: 15px;
+   	min-height: 300px;
+   	background-color: rgba(0,0,0,0.6);
    	border:1px #888;
 }
 .stream-list .x-scroll-indicator {
     opacity: 0 !important;
 }
-
+.stream-list .item-title{
+	margin: 10px;
+}
+.stream-list .item-content{
+	margin: 0 10px 10px 10px;
+	font-size:12px;
+}
+.stream-list .item-picture{
+	margin: 0;
+	min-height: 60vw;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+.stream-list .item-publish-date{
+	font-size: 12px;
+	margin: 5px;
+}
 /* end of stream list css*/
 
 
@@ -182,4 +225,13 @@ html{
 .x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{
 	font-weight: bolder;
 	color:#8e8e8e;
+}
+
+
+/*用来渐变背景图片的*/
+.x-container.x-navigationview{
+	background-color: rgba(0,0,0,0);
+}
+.x-navigation-bar.x-dock-item.x-docked-top {
+	background-color: rgba(0,0,0,0);
 }

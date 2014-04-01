@@ -7,7 +7,8 @@ Ext.define('Business.view.StreamList', {
     extend: 'Ext.Container',
     alias:"widget.streamlist",
     requires:[
-    	'Business.view.PostItem'
+    	'Business.view.PostItem',
+    	'Business.plugin.DataViewPaging'
     ],
     config: {
     	cls:'stream-list',
@@ -39,35 +40,17 @@ Ext.define('Business.view.StreamList', {
 				defaultType:"postitem",
 				useComponents: true,
 				cls:"itemlist",
-				autoScroll:true,
-				autoLoad:true,
 				loadingText:"loading...",
 				store:'Stream',
-				infinite: true,
+				infinite:true,
 				plugins:[
-					// {
-		   //              ptype: 'pullrefresh',
-		   //              refreshFn: function(callback, plugin) {
-		   //                  console.log( 'me1' );
-		   //                  if (navigator.geolocation) {
-		   //                      navigator.geolocation.getCurrentPosition(function(position) {
-		   //                          console.log( 'me2' );
-		   //                          Rad.stores.games.getProxy().extraParams.lat  = position.coords.latitude;
-		   //                          Rad.stores.games.getProxy().extraParams.long  = position.coords.longitude;  
-		   //                          var store = plugin.list.getStore();
-		   //                          store.load(function(records, operation, success) {
-		   //                              callback.call(plugin);
-		   //                              console.log( 'me3' );
-		   //                          });
-		   //                      }); 
-		   //                  }
-		   //              }
-		   //          },
 			        {
-			            xclass:'Ext.plugin.ListPaging',
+			            //xclass:'Ext.plugin.ListPaging',
+			            xclass: 'Business.plugin.DataViewPaging',
 			            autoPaging: true,
 			            // These override the text; use CSS for styling
-			            loadMoreText: '加载更多...'
+			            noMoreRecordsText:'已到底部',
+			            loadMoreText :''
 			        }
 			    ]
 			}
