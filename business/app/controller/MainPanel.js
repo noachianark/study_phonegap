@@ -43,47 +43,32 @@ Ext.define('Business.controller.MainPanel', {
         this.getMainpanel().setNavBar(this.getNavi(),value);
     },
 
-    scanAction:function(){
+    scanAction:function(btn){
         //开启相机并扫描，返回结果后转至showUserProfile。
         //根据用户ID调用store,返回数据后，调用user profile页面。
         var me = this;
-        //Ext.getStore("User").load();
-        var store = Ext.create("Business.store.User");
-        // store.getProxy().setExtraParams({
-
-        // });
-        store.load({
-            params:{
-                businessId:Business.app.userinfo.get('businessId')+'',
-                qrString:'8c4624d92ee8c457ff06f289c7866db74d0c86fb8739b303' 
-            },
-            scope:this,
-            callback: function(records, operation, success){
-                if (success) {
-                    console.log("xxx");
-                    //me.showUserProfile(records);
-                } else {
-                    console.log('error');
-                }                
+        var qr = '8c4624d92ee8c457bbbb67959427fb86';
+        PVipCardAction.getVipCardByQRString(
+            Business.app.userinfo.get('businessId')+'',
+            qr,
+            function(actionResult){
+                if(actionResult.success){
+                    console.log(actionResult.data);
+                    var user = new Business.model.User(actionResult.data);
+                    user.set('qrString',qr);
+                    me.showUserProfile(user);
+                }else{
+                    Ext.Msg.Alert('信息',actionResult.message);
+                }
             }
-        });
-        // PVipCardAction.getVipCardByQRString(Business.app.userinfo.get('businessId')+'','8c4624d92ee8c457ff06f289c7866db74d0c86fb8739b303',function(actionResult){
-        //     if(actionResult.success){
-        //         console.log(actionResult.data);
-        //         //me.loginSucces(actionResult.data,values.mall);
-        //     }else{
-        //         console.log(actionResult.message);
-        //         //me.loginFailed(actionResult.message,btn);
-        //     }
-        // });
+        );
         
     },
 
-    showUserProfile:function(records){
+    showUserProfile:function(user){
         //获取到用户信息。
         var profile = Ext.create("Business.view.UserProfile");
-        profile.setData(records[0]);
-        profile.setTitle(records[0].get('username'));
+        profile.setData(user);
         this.getNavi().push([profile]);
     }
 });

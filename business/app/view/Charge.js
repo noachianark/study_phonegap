@@ -115,6 +115,11 @@ Ext.define('Business.view.Charge', {
 					}      			
         		]
         	},
+            {
+                itemId:'depositPayback',
+                xtype:'label',
+                tpl:'充值返现：￥{rebate}'
+            },
         	{
                 itemId:'balanceBefore',
         		xtype:"label",

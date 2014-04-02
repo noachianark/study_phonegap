@@ -10,6 +10,7 @@ Ext.define('Business.view.Consume', {
         'Ext.field.Number'
     ],
     config: {
+    	autoDestroy:true,
         cls:'consume',
         title:'会员结账',
         layout:'vbox',
@@ -33,7 +34,7 @@ Ext.define('Business.view.Consume', {
 			{
 				xtype:'label',
 				itemId:'payfor',
-				tpl:'实际消费：￥{payfor}元'
+				tpl:'应付金额：￥{payfor}元'
 			},
 			{
 				xtype:'fieldset',
@@ -47,11 +48,21 @@ Ext.define('Business.view.Consume', {
 				]
 			},
 			{
+				xtype:'fieldset',
+				items:[
+					{
+						xtype:'numberfield',
+						itemId:'cashpayfield',
+						name:'cashpay',
+						label:'现金支付'
+					}
+				]
+			},
+			{
 				xtype:'label',
-				itemId:'cashpay',
-				name:'cashpay',
-				tpl:'现金支付:{cashpay}'
-			},		
+				itemId:'changeAmount',
+				tpl:'找零{change}'
+			},
 			{
 				xtype:'label',
 				itemId:'credit',

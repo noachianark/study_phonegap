@@ -60,13 +60,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'deleteCouponPictures'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 1,
+        name: 'addNewsPictures'/*(String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 3,
         formHandler: false
       },
       {
-        name: 'addNewsPictures'/*(String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 3,
+        name: 'deleteCouponPictures'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 1,
         formHandler: false
       },
       {
@@ -90,12 +90,12 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'editNews'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'publisCoupon'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },
       {
-        name: 'publisCoupon'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'editNews'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       }
@@ -255,13 +255,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getOperatorById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 1,
+        name: 'login'/*(String, String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 4,
         formHandler: false
       },
       {
-        name: 'login'/*(String, String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 4,
+        name: 'getOperatorById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 1,
         formHandler: false
       },
       {
@@ -385,17 +385,17 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'findConsumeHistories'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 1,
-        formHandler: false
-      },
-      {
         name: 'findWithdrawHistories'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },
       {
         name: 'findDepositHistories'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findConsumeHistories'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },

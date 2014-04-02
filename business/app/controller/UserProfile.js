@@ -59,14 +59,17 @@ Ext.define('Business.controller.UserProfile', {
     //when view apply setData function , call this function to fill the data to children fields
     updateinfo:function(me, newData, eOpts){
         console.log(newData);
+        this.getUserview().setTitle("您好，"+newData.get('userName'));
     	this.getUserview().userinfo = newData;
-		this.getUserview().down('#balance').setData({balance:newData.get('balance')});
-		this.getUserview().down('#credit').setData({credit:newData.get('credit')});
-		this.getUserview().down('#consumed').setData({consumed:newData.get('consumed')});
+		this.getUserview().down('#balance').setData({balance:newData.get('deposit')});
+		this.getUserview().down('#credit').setData({credit:newData.get('totalPoint')});
+		this.getUserview().down('#consumed').setData({consumed:newData.get('totalConsume')});
+        //total deposit
 
-		this.getUserview().down('#rebate').setData({rebate:newData.get('rebate')});
-		this.getUserview().down('#discount').setData({discount:newData.get('discount')});
-		this.getUserview().down('#left_credit').setData({left_credit:newData.get('left_credit')});
-		this.getUserview().down('#rate').setData({rate:newData.get('rate')});
+		this.getUserview().down('#rebate').setData({rebate:newData.get('depositMoneyBackPercent')});
+		this.getUserview().down('#discount').setData({discount:newData.get('discountPercent')});
+		this.getUserview().down('#left_credit').setData({left_credit:newData.get('point')});
+		this.getUserview().down('#rate').setData({rate:newData.get('pointPercent')});
+        this.getUserview().down('#cardType').setData({type:newData.get('cardType')});
     }
 });

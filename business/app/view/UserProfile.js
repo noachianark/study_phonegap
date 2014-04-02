@@ -9,13 +9,14 @@ Ext.define('Business.view.UserProfile', {
     config: {
     	cls:"user-profile",
         fullscreen:true,
-        title:"您好，X会员",
         layout:'vbox',
+        title:'',
         items:[
         	{
         		xtype:"container",
         		layout:'hbox',
         		cls:"profiles",
+
         		items:[
         			{
         				cls:'user-avatar-inner',
@@ -81,8 +82,10 @@ Ext.define('Business.view.UserProfile', {
                                 }, 
                                 items:[
                                     {
+                                        xtype:'label',
+                                        itemId:'cardType',
                                         flex:1,
-                                        html:"<span class='user-card-type-label'>普卡</span>"
+                                        tpl:"<span class='user-card-type-label'>{type}</span>"
                                     }
                                 ]
                             }

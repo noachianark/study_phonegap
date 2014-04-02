@@ -17,7 +17,7 @@ Ext.define('Business.controller.Consume', {
         	panel:"consumepanel",
             consumefield:"consumepanel #consumefield",
             cardpayfield:'consumepanel #cardpayfield',
-            cashpayfield:'consumepanel #cashpay',
+            cashpayfield:'consumepanel #cashpayfield',
             consumeBtn:'consumepanel #consume',
             returnBtn:'consumesuccess #returnBtn',
             successpanel:'consumesuccess'
@@ -32,6 +32,9 @@ Ext.define('Business.controller.Consume', {
         	cardpayfield:{
         		change:'cardpayFieldChange'
         	},
+            cashpayfield:{
+                change:'cashpayFieldChange'
+            },
             consumeBtn:{
                 tap:'consumeAction'
             },
@@ -45,52 +48,81 @@ Ext.define('Business.controller.Consume', {
     },
 
     initia:function(){
-    	var balance = this.getUserprofile().userinfo.getData().balance;
-    	var discount = this.getUserprofile().userinfo.getData().discount;
-    	var rate = this.getUserprofile().userinfo.getData().rate;
+    	var deposit = this.getUserprofile().userinfo.get('deposit');
+    	var discount = this.getUserprofile().userinfo.get('discountPercent');
+    	var pointPercent = this.getUserprofile().userinfo.get('pointPercent');
 
-    	this.rate = Number(rate?rate:0)/100;
+    	this.pointPercent = Number(pointPercent?pointPercent:0)/100;
     	this.discount = Number(discount?discount:0)/100;
-    	this.balance = Number(balance?balance:0);
-    	
+    	this.balance = Number(deposit?deposit:0);
+    	this.consume = 0;
     	this.getPanel().down('#discount').setData({discount:this.discount * 100});
     	
         this.setValue(0);
+        this.getCashpayfield().setValue(0);
     },
 
     consumeAction:function(btn){
         var me = this;
-        console.log(this.getPanel().getValues());
-        var store = Ext.create('Business.store.Consume');
+        var user = this.getUserprofile().userinfo;
+        //消费金额
+        var consume = Number(this.getPanel().getValues().consumes).toFixed(2);
+        //卡内支付
+        var cardpay = Number(this.getPanel().getValues().cardpay).toFixed(2);
+        if(Number(cardpay) > Number(consume) || Number(cardpay) < 0){
+            cardpay = consume;
+            this.getCardpayfield().setValue('cardpay',cardpay);
+            Ext.Msg.alert('信息','卡内余额支付金额需小于消费金额');
+            return;
+        }else if(Number(cardpay) > Number(this.balance)){
+            cardpay = this.balance;
+            this.getPanel().setValue('cardpay',cardpay);
+            Ext.Msg.Alert('信息','卡内余额不足，余下金额请使用现金支付');
+            return;
+        }
+
+        //应付金额
+        var accountPayable = Number(consume * (1-me.discount)).toFixed(2);
+        //现金支付
+        var cashPayment = Number(accountPayable - cardpay).toFixed(2);
+
+        var params = {
+            accountPayable: accountPayable,
+            cardPayment: cardpay,
+            cashPayment: cashPayment,
+            changeAmount: me.getPanel().down('#changeAmount').getData().change,
+            consumeSubject: '消费',
+            consumptionAmount:me.getConsumefield().getValue()+'',
+            discount:Number(consume * me.discount).toFixed(2),
+            notes:'',
+            reveivedPoints:me.getPanel().down('#credit').getData().credit,
+            shopId:Business.app.userinfo.get('shopId'),
+            userQrString:user.get('qrString'),
+            vipCardId:user.get('cardTypeId')
+        };
 
         Ext.Viewport.setMasked({
             xtype:'loadmask',
             message:'扣款中请稍后...'
         });
 
-        store.load({
-            scope:this,
-            callback:function(records,operation,success){
-                var task = Ext.create('Ext.util.DelayedTask',function(){
-                    if(success){
-                        if(records[0].data.success){
-                            me.consumeSuccess();
-                        }else{
-                            Ext.Msg.alert("信息","这里是错误信息");
-                        }
-                    }
-                    Ext.Viewport.setMasked(false);
-                },this);
-
-                task.delay(1000);
+        PTransactionAction.consumeFromDeposit(
+            params,
+            function(actionResult){
+                if(actionResult.success){
+                    me.consumeSuccess();
+                }else{
+                    Ext.Msg.alert("信息",actionResult.message);
+                }
+                Ext.Viewport.setMasked(false);
             }
-        });
+        );
 
     },
 
     consumeSuccess:function(){
         var me = this;
-        var user = this.getUserprofile().userinfo.getData().username;
+        var user = this.getUserprofile().userinfo.get('userName');
         var successpanel = Ext.create('Business.view.ConsumeSuccess');
         successpanel.setData({
             balance : Number(this.balance)-Number(this.consume),
@@ -104,10 +136,10 @@ Ext.define('Business.controller.Consume', {
 
     successful:function(self, newData, eOpts){
         var data = this.getUserprofile().userinfo.getData();
-        data.balance = this.getPanel().down('#balance').getData().balance;
-        data.consumed = Number(data.consumed) + Number(newData.consume);
-        data.credit = Number(data.credit) + Number(this.getPanel().down('#credit').getData().credit);
-        data.left_credit = Number(data.left_credit) + Number(this.getPanel().down('#credit').getData().credit);
+        data.deposit = this.getPanel().down('#balance').getData().balance;
+        data.totalConsume = Number(data.totalConsume) + Number(newData.consume);
+        data.totalPoint = Number(data.totalPoint) + Number(this.getPanel().down('#credit').getData().credit);
+        data.point = Number(data.point) + Number(this.getPanel().down('#credit').getData().credit);
 
         var userinfo = Ext.create('Business.model.User');
         userinfo.setData(data);
@@ -161,35 +193,54 @@ Ext.define('Business.controller.Consume', {
     		Ext.Msg.alert("提示信息",msg);
     	}
         self.setValue(newValue);
-        this.getCashpayfield().setData({cashpay:cash});
+        this.getCashpayfield().setValue(cash);
         //this.getCashpayfield().dom.value(cash);
         var bal = (Number(this.balance) - Number(newValue)).toFixed(1);
         this.getPanel().down("#balance").setData({balance:bal});
     },
 
-    setValue:function(consumed,cash){
+    cashpayFieldChange:function(self, newValue, oldValue, eOpts){
+        var user = this.getUserprofile().userinfo;
+        var cardpay = this.getCardpayfield().getValue();
+        var needcash = Number(Number(this.consume)*(1-Number(this.discount)) - Number(cardpay)).toFixed(1); 
+        if(Number(newValue) >= Number(needcash)){
+            this.getPanel().down('#changeAmount').setData({change:Number(Number(newValue) - Number(needcash)).toFixed(1)});
+        }else if(needcash=='NaN'){
+
+        }else{
+            self.setValue(needcash);
+            Ext.Msg.alert("信息",'现金不足');
+        }
+        
+    },
+
+    setValue:function(consumed){
+        var user = this.getUserprofile().userinfo;
     	var payfor = (Number(consumed) * ( 1- this.discount )).toFixed(1);
         this.payfor = payfor;
         this.getPanel().down("#payfor").setData({payfor:payfor});
-        console.log("pay:"+payfor);
     	var bal = this.balance;
     	if(this.balance < Number(payfor) ){
     		//余额不足
     		this.getCardpayfield().setValue(Number(this.balance).toFixed(1));
     		var cashpay = (Number(payfor) - Number(this.balance)).toFixed(1);
-    		this.getCashpayfield().setData({cashpay:cashpay});
+    		this.getCashpayfield().setValue(cashpay);
     		bal = 0;
+
             //this.afterpay = 0;
     	}else{
     		//余额充足
-			this.getCashpayfield().setData({cashpay:0});
+			this.getCashpayfield().setValue(0);
 			var cardpay = Number(payfor).toFixed(1);
 			this.getCardpayfield().setValue(cardpay);
     		bal = Number(this.balance) - Number(payfor);
     	}
+
+        this.getPanel().down('#changeAmount').setData({change:0});
+
     	var credit =  Math.round(Number(payfor) * this.rate);
-    	this.getPanel().down('#credit').setData({credit:credit});
-    	this.getPanel().down('#balance').setData({balance:bal});
+    	this.getPanel().down('#credit').setData({credit:Number(user.get('pointPercent')/100*consumed).toFixed(0)});
+    	this.getPanel().down('#balance').setData({balance:Number(bal).toFixed(1)});
         this.getConsumefield().setValue(Number(consumed));
     }
 

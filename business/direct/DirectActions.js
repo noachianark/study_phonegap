@@ -51,13 +51,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'deleteCouponPictures',
-        len: 1,
+        name: 'addNewsPictures',
+        len: 3,
         formHandler: false
       },
       {
-        name: 'addNewsPictures',
-        len: 3,
+        name: 'deleteCouponPictures',
+        len: 1,
         formHandler: false
       },
       {
@@ -81,12 +81,12 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'editNews',
+        name: 'publisCoupon',
         len: 1,
         formHandler: false
       },
       {
-        name: 'publisCoupon',
+        name: 'editNews',
         len: 1,
         formHandler: false
       }
@@ -246,13 +246,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getOperatorById',
-        len: 1,
+        name: 'login',
+        len: 4,
         formHandler: false
       },
       {
-        name: 'login',
-        len: 4,
+        name: 'getOperatorById',
+        len: 1,
         formHandler: false
       },
       {
@@ -376,17 +376,17 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'findConsumeHistories',
-        len: 1,
-        formHandler: false
-      },
-      {
         name: 'findWithdrawHistories',
         len: 1,
         formHandler: false
       },
       {
         name: 'findDepositHistories',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findConsumeHistories',
         len: 1,
         formHandler: false
       },

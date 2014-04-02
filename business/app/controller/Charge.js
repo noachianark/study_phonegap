@@ -31,7 +31,7 @@ Ext.define('Business.controller.Charge', {
     },
 
     initia:function(){
-        var balance = this.getUserprofile().userinfo.getData().balance;
+        var balance = this.getUserprofile().userinfo.get('deposit');
         this.balance = Number(balance?balance:0);
         this.getChargefield().setValue(100);
     },
@@ -40,57 +40,88 @@ Ext.define('Business.controller.Charge', {
         var me = this;
         console.log(this.getPanel().getValues());
         var store = Ext.create('Business.store.Charge');
-
+        var user = me.getUserprofile().userinfo;
         Ext.Viewport.setMasked({
             xtype: 'loadmask',
             message: '充值中请稍后...'
         });
 
-        store.load({
-            scope:this,
-            callback:function(records, operation,success){
-                var task = Ext.create('Ext.util.DelayedTask', function() {
-                    //this.confirmAction();
-                    if(success){
-                        if(records[0].data.success){
-                            me.chargeSuccess();
-                        }
-                    }
+        var realAmount = Number(me.getChargefield().getValue());
+        var rewardAmount = (Number(user.get('depositMoneyBackPercent')).toFixed(2) * realAmount).toFixed(2) / 100;
+        var notes = this.getPanel().getValues().notes;
+        var cardid = user.get('cardTypeId');
 
-                    Ext.Viewport.setMasked(false);
+        var params = {
+            realAmount:realAmount,
+            rewardAmount:rewardAmount,
+            shopId:Business.app.userinfo.get('shopId'),
+            businessId:Business.app.userinfo.get('businessId'),
+            vipCardId:cardid,
+            note:notes
+        };
 
-                }, this);
-
-                task.delay(1000);
-
+        PTransactionAction.deposit(params,function(actionResult){
+            if(actionResult.success){
+                console.log(actionResult);
+                me.chargeSuccess();
+            }else{
+                console.log("failed");
             }
+            Ext.Viewport.setMasked(false);
         });
+
+        // store.load({
+        //     params:{
+        //         realAmount:realAmount,
+        //         rewardAmount:rewardAmount,
+        //         shopId:Business.app.userinfo.get('shopId'),
+        //         businessId:Business.app.userinfo.get('businessId'),
+        //         vipCardId:cardid,
+        //         note:notes
+        //     },
+        //     scope:this,
+        //     callback:function(records, operation,success){
+        //         var task = Ext.create('Ext.util.DelayedTask', function() {
+        //             //this.confirmAction();
+        //             if(success){
+        //                 if(records[0].data.success){
+        //                     me.chargeSuccess();
+        //                 }
+        //             }
+
+        //             Ext.Viewport.setMasked(false);
+
+        //         }, this);
+
+        //         task.delay(1000);
+
+        //     }
+        // });
     },
 
     chargeSuccess:function(){
         var me = this;
-        var user = this.getUserprofile().userinfo.getData().username;
-        var balance = this.getUserprofile().userinfo.getData().balance;
+        var user = this.getUserprofile().userinfo.get('userName');
+        var balance = this.getUserprofile().userinfo.get('deposit');
         var money = this.getChargefield().getValue();
         var successpanel = Ext.create('Business.view.ChargeSuccess');
-        successpanel.setData({username:user,balance:Number(money)+Number(balance)});
+        successpanel.setData({userName:user,deposit:Number(money)+Number(balance)});
         
         me.getNavi().push([successpanel]);
         me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();
     },
 
     successful:function( self, newData, eOpts){
-        console.log("lalal ssss");
-        
+
         var data = this.getUserprofile().userinfo.getData();
-        data.balance = newData.balance;
+        data.deposit = newData.deposit;
 
         var userinfo = Ext.create('Business.model.User');
         userinfo.setData(data);
         this.getUserprofile().setData(userinfo);
 
-        this.getSuccesspanel().down('#charge-balance').setData({balance:newData.balance});
-        this.getSuccesspanel().down('#charge-username').setData({username:newData.username});
+        this.getSuccesspanel().down('#charge-balance').setData({balance:newData.deposit});
+        this.getSuccesspanel().down('#charge-username').setData({username:newData.userName});
     },
 
     confirmAction:function(){
@@ -111,7 +142,11 @@ Ext.define('Business.controller.Charge', {
     },
 
     setValue:function(money){
-        var af = this.balance + Number(money);
+        
+        var rebate = (Number(money)*Number(this.getUserprofile().userinfo.get('depositMoneyBackPercent'))/100).toFixed(2);
+        var af = Number(this.balance) + Number(money) + Number(rebate);
+        console.log(rebate);
+        this.getPanel().down('#depositPayback').setData({rebate:rebate});
         this.getPanel().down('#balanceBefore').setData({before:this.balance});
         this.getPanel().down('#balanceAfter').setData({after:af});        
     }
