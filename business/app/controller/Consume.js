@@ -88,17 +88,17 @@ Ext.define('Business.controller.Consume', {
 
         var params = {
             accountPayable: accountPayable,
-            cardPayment: cardpay,
-            cashPayment: cashPayment,
-            changeAmount: me.getPanel().down('#changeAmount').getData().change,
+            cardPayment: cardpay+'',
+            cashPayment: cashPayment+'',
+            changeAmount: me.getPanel().down('#changeAmount').getData().change+'',
             consumeSubject: '消费',
             consumptionAmount:me.getConsumefield().getValue()+'',
-            discount:Number(consume * me.discount).toFixed(2),
+            discount:Number(consume * me.discount).toFixed(2)+'',
             notes:'',
-            reveivedPoints:me.getPanel().down('#credit').getData().credit,
-            shopId:Business.app.userinfo.get('shopId'),
+            reveivedPoints:me.getPanel().down('#credit').getData().credit+'',
+            shopId:Business.app.userinfo.get('shopId')+'',
             userQrString:user.get('qrString'),
-            vipCardId:user.get('cardTypeId')
+            vipCardId:user.get('id')+''
         };
 
         Ext.Viewport.setMasked({
@@ -113,8 +113,9 @@ Ext.define('Business.controller.Consume', {
                     me.consumeSuccess();
                 }else{
                     Ext.Msg.alert("信息",actionResult.message);
+                    Ext.Viewport.setMasked(false);
                 }
-                Ext.Viewport.setMasked(false);
+                
             }
         );
 
@@ -122,31 +123,56 @@ Ext.define('Business.controller.Consume', {
 
     consumeSuccess:function(){
         var me = this;
-        var user = this.getUserprofile().userinfo.get('userName');
-        var successpanel = Ext.create('Business.view.ConsumeSuccess');
-        successpanel.setData({
-            balance : Number(this.balance)-Number(this.consume),
-            consume : this.consume,
-            username: user
+        var user = this.getUserprofile().userinfo;
+
+        PVipCardAction.getVipCardById(user.get('id'),function(actionResult){
+            if(actionResult.success){
+                var qrStr = user.get('qrString');
+                actionResult.data.qrString = qrStr;
+                me.getUserprofile().setData(new Business.model.User(actionResult.data));
+                user = me.getUserprofile().userinfo;
+                var successpanel = Ext.create('Business.view.ConsumeSuccess');
+                successpanel.setData({
+                    balance : user.get('deposit'),
+                    consume : me.consume,
+                    username: user.get('userName')
+                });
+                me.getNavi().push([successpanel]);
+                me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();                
+            }else{
+                console.log('失败了');
+            }
+            Ext.Viewport.setMasked(false);
         });
 
-        me.getNavi().push([successpanel]);
-        me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();
+
+
+
+
+        // var successpanel = Ext.create('Business.view.ConsumeSuccess');
+        // successpanel.setData({
+        //     balance : Number(this.balance)-Number(this.consume),
+        //     consume : this.consume,
+        //     username: user
+        // });
+
+        // me.getNavi().push([successpanel]);
+        // me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();
     },
 
     successful:function(self, newData, eOpts){
-        var data = this.getUserprofile().userinfo.getData();
-        data.deposit = this.getPanel().down('#balance').getData().balance;
-        data.totalConsume = Number(data.totalConsume) + Number(newData.consume);
-        data.totalPoint = Number(data.totalPoint) + Number(this.getPanel().down('#credit').getData().credit);
-        data.point = Number(data.point) + Number(this.getPanel().down('#credit').getData().credit);
+        // var data = this.getUserprofile().userinfo.getData();
+        // data.deposit = this.getPanel().down('#balance').getData().balance;
+        // data.totalConsume = Number(data.totalConsume) + Number(newData.consume);
+        // data.totalPoint = Number(data.totalPoint) + Number(this.getPanel().down('#credit').getData().credit);
+        // data.point = Number(data.point) + Number(this.getPanel().down('#credit').getData().credit);
 
-        var userinfo = Ext.create('Business.model.User');
-        userinfo.setData(data);
-        this.getUserprofile().setData(userinfo);
+        // var userinfo = Ext.create('Business.model.User');
+        // userinfo.setData(data);
+        // this.getUserprofile().setData(userinfo);
 
         this.getSuccesspanel().down('#consume-username').setData({username:newData.username});
-        this.getSuccesspanel().down('#consume-balance').setData(this.getPanel().down('#balance').getData());
+        this.getSuccesspanel().down('#consume-balance').setData({balance:newData.balance});
         this.getSuccesspanel().down('#consume-consume').setData({consume:newData.consume});
     },
 

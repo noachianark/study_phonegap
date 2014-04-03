@@ -47,7 +47,8 @@ Ext.define('Business.controller.MainPanel', {
         //开启相机并扫描，返回结果后转至showUserProfile。
         //根据用户ID调用store,返回数据后，调用user profile页面。
         var me = this;
-        var qr = '8c4624d92ee8c457bbbb67959427fb86';
+        //var qr = '8c4624d92ee8c457bbbb67959427fb86';
+        var qr = '9725758c36197f9abbbb67959427fb86';
         PVipCardAction.getVipCardByQRString(
             Business.app.userinfo.get('businessId')+'',
             qr,

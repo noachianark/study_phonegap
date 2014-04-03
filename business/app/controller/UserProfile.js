@@ -7,7 +7,8 @@ Ext.define('Business.controller.UserProfile', {
     extend: 'Ext.app.Controller',
     requires:[
         'Business.view.Charge',
-        'Business.view.Consume'
+        'Business.view.Consume',
+        'Business.view.Exchange'
     ],
 
     config: {
@@ -17,7 +18,8 @@ Ext.define('Business.controller.UserProfile', {
         	consume:'userprofile #consume',
         	withdraw:'userprofile #withdraw',
         	exchange:'userprofile #exchange',
-        	navi:"main"
+        	navi:"main",
+            userRecords:'userrecords'
         },
         control:{
         	userview:{
@@ -49,11 +51,13 @@ Ext.define('Business.controller.UserProfile', {
     },
 
     withdrawAction:function(){
-
+        var withdraw = Ext.create('Business.view.Withdraw');
+        this.getNavi().push([withdraw]);
     },
 
     exchangeAction:function(){
-
+        var exchange = Ext.create('Business.view.Exchange');
+        this.getNavi().push([exchange]);
     },
 
     //when view apply setData function , call this function to fill the data to children fields

@@ -25,7 +25,9 @@ Ext.application({
         'UserProfile',
         'Charge',
         'Consume',
-        'Wizard'
+        'Wizard',
+        'Exchange',
+        'Withdraw'
     ],
 
     models:[

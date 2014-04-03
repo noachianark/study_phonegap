@@ -49,7 +49,7 @@ Ext.define('Business.controller.Charge', {
         var realAmount = Number(me.getChargefield().getValue());
         var rewardAmount = (Number(user.get('depositMoneyBackPercent')).toFixed(2) * realAmount).toFixed(2) / 100;
         var notes = this.getPanel().getValues().notes;
-        var cardid = user.get('cardTypeId');
+        var cardid = user.get('id');
 
         var params = {
             realAmount:realAmount,
@@ -66,8 +66,9 @@ Ext.define('Business.controller.Charge', {
                 me.chargeSuccess();
             }else{
                 console.log("failed");
+                Ext.Viewport.setMasked(false);
             }
-            Ext.Viewport.setMasked(false);
+            
         });
 
         // store.load({
@@ -101,24 +102,27 @@ Ext.define('Business.controller.Charge', {
 
     chargeSuccess:function(){
         var me = this;
-        var user = this.getUserprofile().userinfo.get('userName');
-        var balance = this.getUserprofile().userinfo.get('deposit');
-        var money = this.getChargefield().getValue();
-        var successpanel = Ext.create('Business.view.ChargeSuccess');
-        successpanel.setData({userName:user,deposit:Number(money)+Number(balance)});
-        
-        me.getNavi().push([successpanel]);
-        me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();
+        var user = this.getUserprofile().userinfo;
+        PVipCardAction.getVipCardById(user.get('id'),function(actionResult){
+            if(actionResult.success){
+                var qrStr = user.get('qrString');
+                actionResult.data.qrString = qrStr;
+                me.getUserprofile().setData(new Business.model.User(actionResult.data));
+                user = me.getUserprofile().userinfo;
+                var successpanel = Ext.create('Business.view.ChargeSuccess');
+                successpanel.setData({userName:user.get('userName'),deposit:user.get('deposit')});
+                
+                me.getNavi().push([successpanel]);
+                me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();                
+            }else{
+                console.log('失败了');
+            }
+            Ext.Viewport.setMasked(false);
+        });
+
     },
 
     successful:function( self, newData, eOpts){
-
-        var data = this.getUserprofile().userinfo.getData();
-        data.deposit = newData.deposit;
-
-        var userinfo = Ext.create('Business.model.User');
-        userinfo.setData(data);
-        this.getUserprofile().setData(userinfo);
 
         this.getSuccesspanel().down('#charge-balance').setData({balance:newData.deposit});
         this.getSuccesspanel().down('#charge-username').setData({username:newData.userName});
