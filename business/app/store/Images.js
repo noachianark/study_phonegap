@@ -6,6 +6,15 @@
 Ext.define('Business.store.Images', {
     extend: 'Ext.data.Store',
     config: {
-        fields:['src']
+        fields:['src'],
+        listeners:{
+			beforeload:{
+				fn:function(store, records, isSuccessful){
+					console.log("before image load");
+										
+				}
+			}
+		},
+		proxy:'memory'
     }
 });

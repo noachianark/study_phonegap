@@ -203,7 +203,7 @@ Ext.define('Business.controller.StreamList', {
 			//添加日期选择器
 		}
 
-		wizard.store.add(image);
+		Ext.getStore('Images').add(image);
 		
 		this.getNavi().push([wizard]);
 	}

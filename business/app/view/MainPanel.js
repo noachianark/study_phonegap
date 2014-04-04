@@ -6,7 +6,8 @@
 Ext.define('Business.view.MainPanel', {    
 	extend: 'Ext.TabPanel',
     require: [
-        "Business.view.SreamList"
+        "Business.view.SreamList",
+        'Business.view.Profile'
     ],
     alias: "widget.mainpanel",
 
@@ -29,7 +30,7 @@ Ext.define('Business.view.MainPanel', {
                 iconCls:"icon-qrcode"
             },
             {
-                html:"Second Tab",
+                xtype:"profile",
                 title:"我",
                 label:"商家资料",
                 iconCls:"icon-home"

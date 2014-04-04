@@ -4,15 +4,37 @@
  * Description
  */
 Ext.define('Business.view.InfoWizards.ImageItem', {
-    extend: 'Ext.Img',
+    extend: 'Ext.dataview.component.DataItem',
     alias:'widget.imageitem',
 
     config: {
-		cls:'image-item',
-		height:'20vw',
-		width:'20vw',
-		style:'float:left;border:1px dashed #ff0000',
-		margin:'1px 1px 1px 1px',
-		src:'resources/images/add_image.png'
+    	flex:1,
+    	width:'auto',
+    	layout:'vbox',
+    	margin:10,
+		items:[
+			{
+				xtype:'container',
+				layout:'hbox',
+				items:[
+					{
+						xtype:'img',
+						itemId:'image',
+						width:'30vw',
+						height:'30vw'						
+					},
+					{
+						xtype:'textareafield',
+						placeHolder:'描述内容',
+						flex:1,
+						height:'100%'
+					}
+				]
+			}
+		]
+    },
+    updateRecord:function(record){
+    	console.log('update image item');
+    	this.down('#image').setSrc(record.get('src'));
     }
 });

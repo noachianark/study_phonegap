@@ -5,76 +5,36 @@
  */
 Ext.define('Business.controller.Wizard', {
     extend: 'Ext.app.Controller',
+    alias:'widget.wizard',
     requires: [
-        
+        'Business.view.InfoWizards.InfoPanel'
     ],
 
     config: {
         refs:{
-        	buffer:'imagesbuffer',
-        	addMore:'imagesbuffer #addmore',
-        	cancel:'imagesbuffer #cancel'
+            navi:'main',
+        	buffer:'imagesbuffer'
         },
         control:{
         	buffer:{
         		initialize:'initAction'
         	},
-        	addMore:{
-        		tap:'takePicture'
-        	},
-        	cancel:{
-        		tap:'cancelAction'
-        	}
+            "imagesbuffer #nextBtn":{
+                tap:'nextAction'
+            }
         }
     },
 
     initAction:function(){
+        //this.getBuffer().down('#addmore').on('tap',this.popActionSheet);
     	var me = this;
-        console.log("initAction");
-    	this.getBuffer().store = Ext.create("Ext.data.Store",{
-    		fields:['src'],
-    		listeners:{
-    			updaterecord:{
-    				fn:me.updaterecord,
-    				scope:this
-    			},
-    			addrecords:{
-    				fn:me.addrecords,
-    				scope:this
-    			},
-    			refresh:{
-    				fn:me.refresh,
-    				scope:this
-    			}
-    		}
-    	});
-
-    	console.log("initAction");
+        //console.log(this.getBuffer().down('dataview').getStore());
+        //Ext.getStore('Images').load();
+        //this.getBuffer().down('dataview').getStore().load();
     },
-
-    updaterecord:function( self, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts ){
-    	
-    },
-
-    addrecords:function( store, records, eOpts ){
-    	var me = this;
-    	if(store.getCount() > 0){
-			this.getBuffer().down('container').removeAll();
-			store.each(function(item, index, length){
-	    		var img = Ext.create('widget.imageitem',{src:item.get('src')});
-	    		me.getBuffer().down('container').add(img);
-			},this);
-			if(store.getCount() < 8){
-				this.getBuffer().down('container').add(me.getBuffer().addmore);
-			}
-    	}    	
-    },
-
-    takePicture:function(){
-		this.getBuffer().store.add({src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'});    	
-    },
-
-    refresh:function( self, data, eOpts ){
-    	console.log("refresh store");
+    nextAction:function(nextBtn){
+        console.log("xxxxx");
+        var panel = Ext.create('widget.infopanel');
+        this.getNavi().push([panel]);
     }
 });

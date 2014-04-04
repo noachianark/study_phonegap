@@ -56,7 +56,7 @@ Ext.define('Business.controller.UserRecord', {
         		items:[
         			{
         				xtype:'container',
-        				itemId:'consumelist'
+        				itemId:'consumelist',
         				items:[
         					{
         						html:'消费记录'
@@ -65,7 +65,7 @@ Ext.define('Business.controller.UserRecord', {
         			},
         			{
         				xtype:'container',
-        				itemId:'depositlist'
+        				itemId:'depositlist',
         				items:[
         					{
         						html:'存款记录'
