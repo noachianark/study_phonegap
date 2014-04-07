@@ -15,26 +15,85 @@ Ext.define('Business.view.InfoWizards.ImageItem', {
 		items:[
 			{
 				xtype:'container',
-				layout:'hbox',
+				layout:'vbox',
 				items:[
 					{
-						xtype:'img',
-						itemId:'image',
-						width:'30vw',
-						height:'30vw'						
+						xtype:'container',
+						layout:'hbox',
+						items:[
+							{
+								xtype:'img',
+								itemId:'image',
+								width:'30vw',
+								height:'30vw'						
+							},
+							{
+								xtype:'textareafield',
+								itemId:'content',
+								placeHolder:'描述内容',
+								value:'',
+								flex:1,
+								listeners:{
+									change:{
+										fn:function(self, newValue, oldValue, eOpts ){
+											var id = this.getData().id;
+											if(id){
+												var store = Ext.getStore('Images');
+												var record = store.getById(id);
+												if(record){
+													record.set('content',newValue);
+													store.sync();													
+												}
+											}
+										}
+									}
+								}
+								
+							}
+						]
 					},
 					{
-						xtype:'textareafield',
-						placeHolder:'描述内容',
-						flex:1,
-						height:'100%'
+						xtype:'container',
+						layout:'hbox',
+						items:[
+							{
+								xtype:'button',
+								itemId:'deleteBtn',
+								text:'删除',
+								listeners:{
+									tap:{
+										fn:function(btn){
+											//console.log(this.getData());
+											var id = this.getData().id;
+											if(id){
+												var store = Ext.getStore('Images');
+												var record = store.getById(id);
+												store.remove(record);
+												store.sync();
+											}
+										}
+									}
+								}
+							},
+							{
+								xtype:'button',
+								itemId:'saveBtn',
+								text:'保存'
+							}
+						]
 					}
 				]
 			}
 		]
     },
     updateRecord:function(record){
-    	console.log('update image item');
-    	this.down('#image').setSrc(record.get('src'));
+    	if(record){
+	    	console.log('update image item');
+	    	console.log(record);
+	    	this.down('#image').setSrc(record.get('src'));
+	    	this.down('#deleteBtn').setData({id:record.get('id')});
+	    	this.down('#content').setValue(record.get('content'));
+	    	this.down('#content').setData({id:record.get('id')});
+    	}
     }
 });

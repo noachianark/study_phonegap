@@ -24,6 +24,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 			        {
 			        	xtype:'textfield',
 			        	name:'title',
+			        	itemId:'title',
 			        	placeHolder:'请填写标题',
 			        	margin:10
 			        },
@@ -66,5 +67,8 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
     },
     setNavBar:function(navi,panel){
 
+    },
+    getFormData:function(){
+    	this.down("#")
     }
 });

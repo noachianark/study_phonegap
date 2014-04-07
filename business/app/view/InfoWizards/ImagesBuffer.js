@@ -125,8 +125,9 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
             actionSheet.hide();
         }               
         Ext.getStore('Images').add({
-            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'
-        });            
+            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
+            content:''
+        });
     },
 
     takeGallery:function(){
@@ -135,8 +136,9 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
             actionSheet.hide();
         }       
         Ext.getStore('Images').add({
-            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'
-        });     
+            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
+            content:''
+        });
     }
 
 });

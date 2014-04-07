@@ -31,6 +31,7 @@ Ext.define('Business.controller.MainPanel', {
         this.getMainpanel().getTabBar().getAt(1).addCls("scanBtn");
         this.getMainpanel().addBeforeListener('activeitemchange', function(container, newItem, oldItem, opts){
             if(newItem.getItemId() == "scan"){
+                console.log("xxxxxxxxxxxxxxxxxx");
                 me.scanAction();
                 return false;
             }
@@ -53,6 +54,7 @@ Ext.define('Business.controller.MainPanel', {
             Business.app.userinfo.get('businessId')+'',
             qr,
             function(actionResult){
+                console.log("xxxxxxxxxccccccccccccccccccc");
                 if(actionResult.success){
                     console.log(actionResult.data);
                     var user = new Business.model.User(actionResult.data);
