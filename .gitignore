@@ -8,3 +8,5 @@
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs
 .metadata/.plugins/org.eclipse.jdt.launching/.install.xml
 .metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml
+business/.sencha
+business/touch
