@@ -17,6 +17,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
     	title:'发布',
         items:[
 	        {
+	        	itemId:'container',
 	        	xtype:'container',
 	        	flex:1,
 	        	margin:10,
@@ -31,29 +32,37 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 			        {
 			        	xtype:'textareafield',
 			        	name:'content',
+			        	itemId:'content',
 			        	placeHolder:'请填写描述',
 			        	margin:10
 			        },
 			        {
-			        	xtype:'label',
-			        	html:'开始时间'
-			        },
-					{
-					    xtype: 'textfield',
-					    name:'date',
-					    component: {type: 'date'},
-					    margin:10
-					},
-					{
-						xtype:'label',
-						html:'结束时间'
-					},
-					{
-					    xtype: 'textfield',
-					    name:'date',
-					    component: {type: 'date'},
-					    margin:10
-					}
+			        	xtype:'container',
+			        	itemId:'timerange',
+			        	items:[
+					        {
+					        	xtype:'label',
+					        	html:'开始时间'
+					        },
+							{
+							    xtype: 'textfield',
+							    name:'date',
+							    component: {type: 'date'},
+							    margin:10
+							},
+							{
+								xtype:'label',
+								html:'结束时间'
+							},
+							{
+							    xtype: 'textfield',
+							    name:'date',
+							    component: {type: 'date'},
+							    margin:10
+							}
+			        	]
+			        }
+
 	        	]
 	        },
 
@@ -69,6 +78,11 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 
     },
     getFormData:function(){
-    	this.down("#")
+    	
+    },
+    initialize:function(){
+    	if(this.type=="news"){
+    		this.down("#container").remove(this.down('#timerange'),true);
+    	}
     }
 });

@@ -30,7 +30,7 @@ Ext.define('Business.controller.StreamList', {
     	this.getList().down('dataview').getStore().load();
     },
 
-    popPictureSheet:function(){
+    popPictureSheet:function(type){
     	var me = this;
     	var picSheet = Ext.Viewport.down('#picsheet');
     	if(!picSheet){
@@ -47,8 +47,10 @@ Ext.define('Business.controller.StreamList', {
 			            text: '拍照',
 			            listeners:{
 			            	tap:{
-			            		fn:me.takeCamera,
-			            		scope:this
+			            		fn:function(){
+			            			me.takeCamera(type);
+			            		},
+			            		scope:me
 			            	}
 			            }
 			        },
@@ -58,8 +60,10 @@ Ext.define('Business.controller.StreamList', {
 			            text: '从手机相册中选择',
 			            listeners:{
 			            	tap:{
-			            		fn:me.takeGallery,
-			            		scope:this
+			            		fn:function(){
+			            			me.takeGallery(type);	
+			            		},
+			            		scope:me
 			            	}
 			            }
 			        },
@@ -91,11 +95,6 @@ Ext.define('Business.controller.StreamList', {
     },
 
     popActionSheet:function(){
-
-        var userinfo = Ext.getStore('session').load();
-        var ss = userinfo;
-        console.log(ss);
-
     	var me = this;
 		var actionSheet = Ext.Viewport.down('actionsheet');
 		if(!actionSheet){
@@ -113,7 +112,7 @@ Ext.define('Business.controller.StreamList', {
 			            listeners:{
 			            	tap:{
 			            		fn:me.newsAction,
-			            		scope:this
+			            		scope:me
 			            	}
 			            }
 			        },
@@ -124,7 +123,7 @@ Ext.define('Business.controller.StreamList', {
 			            listeners:{
 			            	tap:{
 			            		fn:me.couponAction,
-			            		scope:this
+			            		scope:me
 			            	}
 			            }
 			        },
@@ -160,7 +159,7 @@ Ext.define('Business.controller.StreamList', {
 			actionSheet.hide();
 		}		
 		//get the picture.
-		var img = {src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'};
+		var img = {url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'};
 		this.postInfomation(type,img);
 	},
 
@@ -169,7 +168,7 @@ Ext.define('Business.controller.StreamList', {
 		if(actionSheet){
 			actionSheet.hide();
 		}			
-		var img = {src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'};
+		var img = {url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100'};
 		this.postInfomation(type,img);
 	},
 
@@ -195,12 +194,11 @@ Ext.define('Business.controller.StreamList', {
 	},
 
 	postInfomation:function(type,image){
-		var wizard = Ext.create('widget.imagesbuffer');
+		var wizard = null;
 		if(type=="news"){
-			wizard.setTitle('发布新闻信息');
+			wizard = Ext.create('widget.imagesbuffer',{type:'news',title:'发布新闻信息'});
 		}else{
-			wizard.setTitle('发布优惠信息');
-			//添加日期选择器
+			wizard = Ext.create('widget.imagesbuffer',{type:'coupon',title:'发布优惠信息'});
 		}
 
 		Ext.getStore('Images').add(image);

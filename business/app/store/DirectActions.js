@@ -9,88 +9,6 @@ Ext.app.REMOTING_API = {
   url: Ext.app.PROVIDER_BASE_URL,
   type: 'remoting',
   actions: {
-    PMessageAction: [
-      {
-        name: 'deleteNewsPictures',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'updateNewsPictures',
-        len: 3,
-        formHandler: false
-      },
-      {
-        name: 'publisNews',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'deleteCoupon',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findCoupons',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findCouponById',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'editCoupon',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'deleteNews',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'addNewsPictures',
-        len: 3,
-        formHandler: false
-      },
-      {
-        name: 'deleteCouponPictures',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'addCouponPictures',
-        len: 3,
-        formHandler: false
-      },
-      {
-        name: 'updateCouponPictures',
-        len: 3,
-        formHandler: false
-      },
-      {
-        name: 'findNewsById',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findNews',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'editNews',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'publisCoupon',
-        len: 1,
-        formHandler: false
-      }
-    ],
     PBusinessConfigurationAction: [
       {
         name: 'saveConfiguration',
@@ -99,6 +17,53 @@ Ext.app.REMOTING_API = {
       },
       {
         name: 'getConfigurations',
+        len: 1,
+        formHandler: false
+      }
+    ],
+    PTransactionAction: [
+      {
+        name: 'consumeFromDeposit',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'exchangePoint',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findPointHistories',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'deposit',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'withdraw',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findWithdrawHistories',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findDepositHistories',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findConsumeHistories',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'consume',
         len: 1,
         formHandler: false
       }
@@ -145,14 +110,91 @@ Ext.app.REMOTING_API = {
         formHandler: false
       }
     ],
-    PBusinessLogAction: [
+    PBusinessAction: [
       {
-        name: 'findOperatorLogs',
+        name: 'findBusinessAdminByDomain',
+        len: 1,
+        formHandler: false
+      }
+    ],
+    PMessageAction: [
+      {
+        name: 'deleteNewsPictures',
         len: 1,
         formHandler: false
       },
       {
-        name: 'findBusinessAdminLogs',
+        name: 'updateNewsPictures',
+        len: 3,
+        formHandler: false
+      },
+      {
+        name: 'publisNews',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'deleteCoupon',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findCoupons',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findCouponById',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'editCoupon',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'deleteNews',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'deleteCouponPictures',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'addNewsPictures',
+        len: 3,
+        formHandler: false
+      },
+      {
+        name: 'addCouponPictures',
+        len: 3,
+        formHandler: false
+      },
+      {
+        name: 'updateCouponPictures',
+        len: 3,
+        formHandler: false
+      },
+      {
+        name: 'findNews',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findNewsById',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'editNews',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'publisCoupon',
         len: 1,
         formHandler: false
       }
@@ -164,12 +206,12 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getRestCardTypeOptions',
+        name: 'getCardTypeById',
         len: 1,
         formHandler: false
       },
       {
-        name: 'getCardTypeById',
+        name: 'getRestCardTypeOptions',
         len: 1,
         formHandler: false
       },
@@ -189,13 +231,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'findCardTypes',
-        len: 1,
+        name: 'setDefaultCardType',
+        len: 2,
         formHandler: false
       },
       {
-        name: 'setDefaultCardType',
-        len: 2,
+        name: 'findCardTypes',
+        len: 1,
         formHandler: false
       },
       {
@@ -266,17 +308,104 @@ Ext.app.REMOTING_API = {
         formHandler: false
       }
     ],
-    PBusinessAction: [
+    PBusinessAdminAction: [
       {
-        name: 'findBusinessAdminByDomain',
+        name: 'findBusinessAdmins',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'logout',
+        len: 0,
+        formHandler: false
+      },
+      {
+        name: 'updateBusinessAdmin',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findBusinessAdminById',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'getBusinessAdminOptions',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'isBusinessAdminExists',
+        len: 2,
+        formHandler: false
+      },
+      {
+        name: 'getLoginInfos',
+        len: 0,
+        formHandler: false
+      },
+      {
+        name: 'login',
+        len: 4,
+        formHandler: false
+      },
+      {
+        name: 'addBusinessAdmin',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'removeBusinessAdmin',
         len: 1,
         formHandler: false
       }
     ],
-    PBusinessAdminAction: [
+    PBusinessLogAction: [
       {
-        name: 'test',
-        len: 0,
+        name: 'findOperatorLogs',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'findBusinessAdminLogs',
+        len: 1,
+        formHandler: false
+      }
+    ],
+    PVipCardAction: [
+      {
+        name: 'getConsumeGroupByMonth',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'getVipCardByQRString',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'changeVipCardTypeAsBulk',
+        len: 2,
+        formHandler: false
+      },
+      {
+        name: 'getVipCardIdByQrString',
+        len: 2,
+        formHandler: false
+      },
+      {
+        name: 'findVipCards',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'changeVipCardType',
+        len: 2,
+        formHandler: false
+      },
+      {
+        name: 'getVipCardById',
+        len: 1,
         formHandler: false
       }
     ],
@@ -308,95 +437,6 @@ Ext.app.REMOTING_API = {
       },
       {
         name: 'addShop',
-        len: 1,
-        formHandler: false
-      }
-    ],
-    PVipCardAction: [
-      {
-        name: 'getConsumeGroupByMonth',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'getVipCardByQRString',
-        len: 2,
-        formHandler: false
-      },
-      {
-        name: 'changeVipCardTypeAsBulk',
-        len: 2,
-        formHandler: false
-      },
-      {
-        name: 'getVipCardIdByQrString',
-        len: 2,
-        formHandler: false
-      },
-      {
-        name: 'findVipCards',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'changeVipCardType',
-        len: 2,
-        formHandler: false
-      },
-      {
-        name: 'getVipCardById',
-        len: 1,
-        formHandler: false
-      }
-    ],
-    PTransactionAction: [
-      {
-        name: 'consumeFromDeposit',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'exchangePoint',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findPointHistories',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'deposit',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'withdraw',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'usePoint',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findWithdrawHistories',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findDepositHistories',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'findConsumeHistories',
-        len: 1,
-        formHandler: false
-      },
-      {
-        name: 'consume',
         len: 1,
         formHandler: false
       }

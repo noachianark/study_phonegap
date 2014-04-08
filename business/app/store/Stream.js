@@ -40,7 +40,8 @@ Ext.define('Business.store.Stream', {
 				fn:function(store, records, isSuccessful){
 					console.log("lalal");
 					store.getProxy().setExtraParams({
-						businessId:Business.app.userinfo.get('businessId')+''
+						businessId:Business.app.userinfo.get('businessId')+'',
+						sort:[{property:'publishTime',direction:'DESC'}]
 					});
 				    var pageSize = store.getPageSize();
 				    var pageIndex = store.currentPage - 1;    // Page numbers start at 1

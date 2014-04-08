@@ -41,7 +41,7 @@ Ext.define('Business.view.InfoWizards.ImageItem', {
 												var store = Ext.getStore('Images');
 												var record = store.getById(id);
 												if(record){
-													record.set('content',newValue);
+													record.set('description',newValue);
 													store.sync();													
 												}
 											}
@@ -88,11 +88,9 @@ Ext.define('Business.view.InfoWizards.ImageItem', {
     },
     updateRecord:function(record){
     	if(record){
-	    	console.log('update image item');
-	    	console.log(record);
-	    	this.down('#image').setSrc(record.get('src'));
+	    	this.down('#image').setSrc(record.get('url'));
 	    	this.down('#deleteBtn').setData({id:record.get('id')});
-	    	this.down('#content').setValue(record.get('content'));
+	    	this.down('#content').setValue(record.get('description'));
 	    	this.down('#content').setData({id:record.get('id')});
     	}
     }

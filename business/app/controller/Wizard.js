@@ -14,8 +14,9 @@ Ext.define('Business.controller.Wizard', {
         refs:{
             navi:'main',
         	buffer:'imagesbuffer',
-            publish:"infopanel",
-            publishAction:'infopanel #publish'
+            info:"infopanel",
+            publishAction:'infopanel #publish',
+            list:'streamlist'
         },
         control:{
         	buffer:{
@@ -25,19 +26,14 @@ Ext.define('Business.controller.Wizard', {
             "imagesbuffer #nextBtn":{
                 tap:'nextAction'
             },
-            publish:{
-
-            },
-            publishAction:'publishAction'
+            publishAction:{
+                tap:'publishAction'
+            }
         }
     },
 
     initAction:function(){
-        //this.getBuffer().down('#addmore').on('tap',this.popActionSheet);
     	var me = this;
-        //console.log(this.getBuffer().down('dataview').getStore());
-        //Ext.getStore('Images').load();
-        //this.getBuffer().down('dataview').getStore().load();
     },
 
     destroyed:function(){
@@ -48,10 +44,8 @@ Ext.define('Business.controller.Wizard', {
 
     nextAction:function(nextBtn){
         var store = Ext.getStore('Images');
-        console.log('Zxzxzxczx');
-        console.log(store.getAllCount());
         if(store.getAllCount() > 0 ){
-            var panel = Ext.create('widget.infopanel');
+            var panel = Ext.create('widget.infopanel',{type:this.getBuffer().type});
             this.getNavi().push([panel]);            
         }else{
             Ext.Msg.alert('信息','您还没有添加任何图片信息');
@@ -61,7 +55,53 @@ Ext.define('Business.controller.Wizard', {
 
     publishAction:function(btn){
         console.log('publish！');
-        var records = Ext.getStore('Images').load();
-        console.log(records);
+        var store = Ext.getStore('Images');
+        var picArr = new Array();
+        store.each(function (item, index, length) {
+            console.log(item.get('description'), index);
+            picArr.push({
+                url:item.get('url'),
+                description:item.get('description')
+            });
+        });
+
+        var type = this.getBuffer().type;
+        if(type=="news"){
+            this.publishNews(picArr);
+        }else{
+            this.publishCoupon(picArr);
+        }
+    },
+    publishNews:function(pictures){
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: '发布中请稍后...'
+        });
+
+        var me = this;
+        
+        var params = {
+            businessId:Business.app.userinfo.get('businessId')+'',
+            title:me.getInfo().down('#title').getValue()+'',
+            content:me.getInfo().down('#content').getValue()+'',
+            pictures:pictures
+        };
+
+        PMessageAction.publisNews(params,function(actionResult){
+            console.log(actionResult);
+            if(actionResult.success){
+                me.publishSuccess();
+            }else{
+                Ext.Msg.alert('信息',actionResult.message);
+            }
+            Ext.Viewport.setMasked(false);
+        });
+    },
+
+    publishSuccess:function(){
+        this.getNavi().pop(2);
+        this.getList().down('dataview').getStore().removeAll();
+        this.getList().down('dataview').getStore().loadPage(1);
+        console.log("jiong");
     }
 });

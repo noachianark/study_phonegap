@@ -6,7 +6,7 @@
 Ext.define('Business.store.Images', {
     extend: 'Ext.data.Store',
     config: {
-        fields:['src','content'],
+        fields:['url','description'],
         listeners:{
 			beforeload:{
 				fn:function(store, records, isSuccessful){

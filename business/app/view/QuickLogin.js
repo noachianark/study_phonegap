@@ -11,7 +11,12 @@ Ext.define('Business.view.QuickLogin', {
     ],
 
     config: {
-        cls:'quic-login',
+        cls:'quick-login',
+        layout:{
+            pack:'center',
+            align:'center',
+            type:'vbox'
+        },
         items:[
         	{
         		xtype:'fieldset',
@@ -21,45 +26,60 @@ Ext.define('Business.view.QuickLogin', {
         				xtype:'textfield',
         				hidden:true,
         				name:'username',
-        				itemId:'username'
+        				itemId:'username',
+                        clearIcon:false
         			},
+                    {
+                        xtype:'label',
+                        html:'魔客会员商家登录',
+                        style:'text-align:center;font-size:30px;',
+                        margin:'0 0 40 0'
+                    },
         			{
         				xtype:'label',
         				itemId:'nameLabel',
-        				tpl:'您好，{username}'
+        				tpl:'您好，{username}',
+                        style:'text-align:center'
         			},
                     {
                         xtype: 'passwordfield',
-                        placeHolder: '密码',
+                        placeHolder: '请输入密码',
                         name: 'password',
-                        required: true
+                        required: true,
+                        clearIcon:false
                     },
-                    {
-                        xtype : 'img',
-                        itemId : 'verifyImg',
-                        width : 80,
-                        border : false,
-                        height : 30,
-                        cls:'verify-code',
-                        src : basePath + 'verify-code.jsp?date=' + new Date().getTime()
-                    },
-                    {
-                        xtype:'label',
-                        html:'看不清？点击图片刷新'
-                    },
+                    // {
+                    //     xtype : 'img',
+                    //     itemId : 'verifyImg',
+                    //     width : 80,
+                    //     border : false,
+                    //     height : 30,
+                    //     cls:'verify-code',
+                    //     src : basePath + 'verify-code.jsp?date=' + new Date().getTime()
+                    // },
                     {
                         xtype:'textfield',
-                        placeHolder:'验证码',
+                        placeHolder:'请输入验证码',
                         itemId:'verifyCode',
                         name:'verifycode',
                         cls:'textfield',
-                        required:true
+                        required:true,
+                        clearIcon:false,
+                        style:{
+                            'text-align':'center',
+                            'background':'url("'+ basePath + 'verify-code.jsp?date=' + new Date().getTime() +'") no-repeat',
+                            'background-position':'right'
+                        }
+                    },
+                    {
+                        
                     },
                     {
                     	xtype:'textfield',
                     	itemId:'domain',
                     	name:'domain',
-                    	hidden:true
+                    	hidden:true,
+                        clearIcon:false
                     }
         		]
         	},

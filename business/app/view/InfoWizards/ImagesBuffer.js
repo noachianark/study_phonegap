@@ -9,8 +9,9 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
     requires: [
         'Business.view.InfoWizards.ImageItem'
     ],
-
+    type:'news',
     config: {
+
         cls:"image-buffer",
         autoDestroy:true,
         fullscreen:true,
@@ -57,6 +58,11 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
     	navi.getNavigationBar().add(btn);
         //navi.getNavigationBar().add(this.cancelBtn);
     },
+
+    setType:function(type){
+        this.type = type;
+    },
+
     popActionSheet:function(btn){
         var me = this;
         var picSheet = Ext.Viewport.down('#picsheet');
@@ -125,8 +131,8 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
             actionSheet.hide();
         }               
         Ext.getStore('Images').add({
-            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
-            content:''
+            url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
+            description:''
         });
     },
 
@@ -136,8 +142,8 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
             actionSheet.hide();
         }       
         Ext.getStore('Images').add({
-            src:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
-            content:''
+            url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
+            description:''
         });
     }
 

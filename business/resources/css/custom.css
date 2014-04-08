@@ -18,14 +18,28 @@ body{
 	margin:10px;
 }
 .loginPanel{
-	background-color: #fff;
+	background-color: #ff0000;
 }
 /* end of login panel css styles block */
 
 
+.quick-login{
+	background: url('../images/login_bg.jpg') no-repeat;
+	background-size: 100% 100%;
+}
+.quick-login.x-form .x-scroll-container, .x-inner.x-form-fieldset-inner{
+	background-color: rgba(0,0,0,0);
+}
 
-
-
+.quick-login input::-webkit-input-placeholder { color:#ffffff; }
+.quick-login input::-moz-placeholder { color:#ffffff; } /* firefox 19+ */
+.quick-login input:-ms-input-placeholder { color:#ffffff; } /* ie */
+.quick-login, .quick-login .x-input-el.x-form-field.x-input-text{
+	color: #ffffff;
+}
+.quick-login .x-form-fieldset .x-form-fieldset-inner{
+	border:0px;
+}
 
 /* main panel css style*/
 .mainpanel{
@@ -219,9 +233,7 @@ body{
 .x-button-label{
 	font-weight: bold;
 }
-.x-form .x-scroll-container{
-	background-color: #eef2f5;
-}
+
 .x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{
 	font-weight: bolder;
 	color:#8e8e8e;

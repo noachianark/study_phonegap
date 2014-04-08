@@ -31,7 +31,6 @@ Ext.define('Business.controller.MainPanel', {
         this.getMainpanel().getTabBar().getAt(1).addCls("scanBtn");
         this.getMainpanel().addBeforeListener('activeitemchange', function(container, newItem, oldItem, opts){
             if(newItem.getItemId() == "scan"){
-                console.log("xxxxxxxxxxxxxxxxxx");
                 me.scanAction();
                 return false;
             }
@@ -49,19 +48,18 @@ Ext.define('Business.controller.MainPanel', {
         //根据用户ID调用store,返回数据后，调用user profile页面。
         var me = this;
         //var qr = '8c4624d92ee8c457bbbb67959427fb86';
-        var qr = '9725758c36197f9abbbb67959427fb86';
+        var qr = '8c4624d92ee8c457bbbb67959427fb86';
         PVipCardAction.getVipCardByQRString(
             Business.app.userinfo.get('businessId')+'',
             qr,
             function(actionResult){
-                console.log("xxxxxxxxxccccccccccccccccccc");
                 if(actionResult.success){
                     console.log(actionResult.data);
                     var user = new Business.model.User(actionResult.data);
                     user.set('qrString',qr);
                     me.showUserProfile(user);
                 }else{
-                    Ext.Msg.Alert('信息',actionResult.message);
+                    Ext.Msg.alert('信息',actionResult.message);
                 }
             }
         );
