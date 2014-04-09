@@ -22,6 +22,8 @@ Ext.define('Business.controller.Login', {
             quicklogin:'quicklogin',
             quickfield:"quicklogin fieldset",
             quickloginbtn:"quicklogin #quickLoginBtn",
+            changeCode:'quicklogin #changeCode',
+            verifyCode:'quicklogin #verifyCode',
             switchlogin:"quicklogin #switchLogin"
     	},
 
@@ -48,6 +50,16 @@ Ext.define('Business.controller.Login', {
     },
 
     inita:function(){
+        var me = this;
+        this.getChangeCode().element.on({
+            tap:function(self){
+                me.getVerifyCode().setStyle({
+                    'text-align':'center',
+                    'background':'url("'+ basePath + 'verify-code.jsp?date=' + new Date().getTime() +'") no-repeat',
+                    'background-position':'right'                    
+                });
+            }
+        });
         //获取本地local storage。
         //var userinfo = Ext.getStore('session').load().getAt(0);
 

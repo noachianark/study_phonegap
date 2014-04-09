@@ -80,22 +80,22 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'findNewsById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 1,
-        formHandler: false
-      },
-      {
         name: 'findNews'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },
       {
-        name: 'editNews'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'findNewsById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },
       {
         name: 'publisCoupon'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'editNews'/*(java.util.Map) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       }
@@ -173,12 +173,12 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getRestCardTypeOptions'/*(java.util.Map) => java.util.List */,
+        name: 'getCardTypeById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 1,
         formHandler: false
       },
       {
-        name: 'getCardTypeById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'getRestCardTypeOptions'/*(java.util.Map) => java.util.List */,
         len: 1,
         formHandler: false
       },
@@ -193,7 +193,7 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'switchAllUserToNewVIPCardType'/*(String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'setDefaultCardType'/*(String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 2,
         formHandler: false
       },
@@ -203,7 +203,7 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'setDefaultCardType'/*(String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        name: 'switchAllUserToNewVIPCardType'/*(String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
         len: 2,
         formHandler: false
       },
@@ -255,13 +255,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getOperatorById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 1,
+        name: 'login'/*(String, String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 4,
         formHandler: false
       },
       {
-        name: 'login'/*(String, String, String, String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
-        len: 4,
+        name: 'getOperatorById'/*(String) => com.zetian.vipmonk.action.actionmodel.BaseResult */,
+        len: 1,
         formHandler: false
       },
       {

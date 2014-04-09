@@ -19,8 +19,10 @@ Ext.define('Business.view.QuickLogin', {
         },
         items:[
         	{
+                margin:"0 0 40 0",
         		xtype:'fieldset',
         		cls:'fieldset',
+                width:"70vw",
         		items:[
         			{
         				xtype:'textfield',
@@ -46,7 +48,8 @@ Ext.define('Business.view.QuickLogin', {
                         placeHolder: '请输入密码',
                         name: 'password',
                         required: true,
-                        clearIcon:false
+                        clearIcon:false,
+                        margin:"20 0 0 0"
                     },
                     // {
                     //     xtype : 'img',
@@ -58,11 +61,12 @@ Ext.define('Business.view.QuickLogin', {
                     //     src : basePath + 'verify-code.jsp?date=' + new Date().getTime()
                     // },
                     {
+                        margin:'30 0 0 0',
                         xtype:'textfield',
                         placeHolder:'请输入验证码',
                         itemId:'verifyCode',
                         name:'verifycode',
-                        cls:'textfield',
+                        cls:'textfield-veryficode',
                         required:true,
                         clearIcon:false,
                         style:{
@@ -72,7 +76,19 @@ Ext.define('Business.view.QuickLogin', {
                         }
                     },
                     {
-                        
+                        itemId:'changeCode',
+                        xtype:'label',
+                        html:'看不清？换一换',
+                        margin:'5 5 5 5',
+                        style:'text-align:right;text-decoration:underline;font-size:14px;',
+                        listeners:{
+                            show:function(el){
+                                console.log("cxcxc");
+                                // el.on('tap',function(){
+                                //     console.log("xxx");
+                                // });
+                            }
+                        }
                     },
                     {
                     	xtype:'textfield',
@@ -86,14 +102,15 @@ Ext.define('Business.view.QuickLogin', {
         	{
         		xtype:'button',
         		itemId:'quickLoginBtn',
-        		cls:'button',
-        		ui:'action',
+        		cls:'login-btn',
         		text:'登 录'
         	},
         	{
         		xtype:'button',
         		itemId:'switchLogin',
-        		text:'切换账号'
+                cls:'login-btn',
+        		text:'切换账号',
+                margin:'30 0 0 0'
         	}
         ]
     }

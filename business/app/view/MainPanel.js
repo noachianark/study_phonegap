@@ -40,8 +40,8 @@ Ext.define('Business.view.MainPanel', {
 
     postBtn:{
         xtype:'button',
-        text:'',
-        iconCls:"icon-pencil",
+        text:'发布',
+        style:'color:#fff;',
         align:'right',
         itemId:'postBtn'
     },

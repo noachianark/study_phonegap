@@ -23,6 +23,8 @@ body{
 /* end of login panel css styles block */
 
 
+
+/*quick login css styles*/
 .quick-login{
 	background: url('../images/login_bg.jpg') no-repeat;
 	background-size: 100% 100%;
@@ -40,10 +42,25 @@ body{
 .quick-login .x-form-fieldset .x-form-fieldset-inner{
 	border:0px;
 }
+.quick-login .login-btn{
+	border-color: #fff;
+	min-width:70vw;
+	background-color: rgba(255,255,255,0.2);
+	color:#fff;
+}
+.quick-login .login-btn span{
+	color: #fff;
+}
+/*quick login css styles*/
+
+
 
 /* main panel css style*/
 .mainpanel{
 	background-color: rgba(0,0,0,0);
+}
+.mainpanel .x-button-label{
+	color: #fff;
 }
 .mainpanel .scanBtn{
 	background-color: #157efb;
@@ -66,6 +83,13 @@ body{
 .mainpanel .x-tab .x-button-icon{
 	width: 100%;
 	height: 100%;
+}
+
+.x-toolbar.x-docked-top {
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+.x-toolbar .x-title{
+	color:#fff;
 }
 
 .x-button-icon.x-shown.icon-home{
@@ -103,7 +127,7 @@ body{
 .stream-list .post-item{
    	margin: 15px;
    	min-height: 300px;
-   	background-color: rgba(0,0,0,0.6);
+   	background-color: rgba(0,0,0,0.5);
    	border:1px #888;
 }
 .stream-list .x-scroll-indicator {
@@ -132,17 +156,20 @@ body{
 
 
 /*user profile css*/
+.user-profile{
+	background-color: rgba(0,0,0,0);
+	color:#fff;
+}
 .user-profile .profiles{
 	margin:15px;
 }
 .user-profile .user-avatar{
-	font-size: 80px;
+	font-size: 15vw;
 	font-family: 'icomoon';
 }
 .user-avatar-inner{
 	/*color: #157efb;*/
-	color: #bababa;
-	border-right: 1px solid #bababa;
+	color: #fff;
 	padding-right: 15px;
 }
 .user-avatar:before{
@@ -150,51 +177,73 @@ body{
 }
 
 .user-profile-info{
-	margin-left: 15px; 
 	text-align: center;
 	font-size: 16px;
+	border-top:3px solid rgba(0,0,0,0.5);
+	background-color: rgba(255,255,255,0.25);
 }
 
 .user-account-info-label{
-	font-style: italic;
-	color: #bababa;
+	color: #b06618;
+	font-size: 13px;
 }
 
-.user-card-type{
-	margin-left: 15px; 
-	font-size:20px;
-	text-align: center;
+.user-account-number{
+	font-size: 25px;
 }
+
 
 .user-card-type-label{
-	border:1px solid #bababa;
-	background-color: #e0e0e0;
-	border-radius: 4px;
-	padding: 0 20px;
+	font-size:13px;
 }
 
 .user-profile .credits{
 	text-align: center;
-	font-size: 15px;
-	border-top: 1px solid #bababa;
-	border-bottom: 1px solid #bababa;
+	font-size: 20px;
+	color: #fff;
+	background-color: rgba(0,0,0,0.6);
+}
+.credits .user-account-info-label{
+	color: #fff;
+	font-size: 13px;
+}
+.credits .user-rates-label{
+	font-size: 21px;
 }
 
+
+.user-profile .x-button{
+	-webkit-box-align: end;
+}
 [class*="user-action-"]{
-	width: 40vw;
-	height: 40vw;
+	width: 50vw;
+	height: 50vw;
+	background-color: rgba(0,0,0,0);
+	border:0px;
 }
 .user-profile .user-action-top-left{
-	margin:20px 10px 10px 20px;
+/*	margin:10px 5px 5px 10px;*/
+	background: url('../images/top_left_btn.png') no-repeat;
+	background-size:38vw 38vw;
+	background-position:center;
 }
 .user-profile .user-action-top-right{
-	margin:20px 20px 10px 10px;
+/*	margin:10px 10px 5px 5px;*/
+	background: url('../images/top_right_btn.png') no-repeat;
+	background-size:38vw 38vw;
+	background-position:center;
 }
 .user-profile .user-action-bottom-left{
-	margin:10px 10px 20px 20px;
+/*	margin:5px 5px 10px 10px;*/
+	background: url('../images/bottom_left_btn.png') no-repeat;
+	background-size:38vw 38vw;
+	background-position:center;
 }
 .user-profile .user-action-bottom-right{
-	margin:10px 20px 20px 10px;
+/*	margin:5px 10px 10px 5px;*/
+	background: url('../images/bottom_right_btn.png') no-repeat;
+	background-size:38vw 38vw;
+	background-position:center;
 }
 /*end of profile css*/
 
@@ -230,8 +279,9 @@ body{
 .x-navigation-bar.x-dock-item.x-docked-top{
 	background-color: #f6f6f8;
 }
-.x-button-label{
+.x-button-normal .x-button-label,.x-button-back .x-button-label,.x-button.x-button-back:before{
 	font-weight: bold;
+	color: #fff;
 }
 
 .x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{

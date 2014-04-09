@@ -71,22 +71,22 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'findNewsById',
-        len: 1,
-        formHandler: false
-      },
-      {
         name: 'findNews',
         len: 1,
         formHandler: false
       },
       {
-        name: 'editNews',
+        name: 'findNewsById',
         len: 1,
         formHandler: false
       },
       {
         name: 'publisCoupon',
+        len: 1,
+        formHandler: false
+      },
+      {
+        name: 'editNews',
         len: 1,
         formHandler: false
       }
@@ -164,12 +164,12 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getRestCardTypeOptions',
+        name: 'getCardTypeById',
         len: 1,
         formHandler: false
       },
       {
-        name: 'getCardTypeById',
+        name: 'getRestCardTypeOptions',
         len: 1,
         formHandler: false
       },
@@ -184,7 +184,7 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'switchAllUserToNewVIPCardType',
+        name: 'setDefaultCardType',
         len: 2,
         formHandler: false
       },
@@ -194,7 +194,7 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'setDefaultCardType',
+        name: 'switchAllUserToNewVIPCardType',
         len: 2,
         formHandler: false
       },
@@ -246,13 +246,13 @@ Ext.app.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'getOperatorById',
-        len: 1,
+        name: 'login',
+        len: 4,
         formHandler: false
       },
       {
-        name: 'login',
-        len: 4,
+        name: 'getOperatorById',
+        len: 1,
         formHandler: false
       },
       {
