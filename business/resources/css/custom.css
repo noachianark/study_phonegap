@@ -357,7 +357,31 @@ body{
 .withdraw .x-form-label span{
 	font-size: 12px;
 }
+.withdrawsuccess .success-tag{
+	width: 10vw;
+	height: 10vw;
+	background: url('../images/success-green.png') no-repeat;
+	background-size: 100% 100%;
+}
+.withdrawsuccess .withdraw-label-success{
+	font-size: 10vw;
+	color: #7cadab;
+}
 /*end of withdraw css styles*/
+
+
+
+
+
+/*exchange css styles */
+.bg_exchange{
+	background: url('../images/bg_exchange.jpg') no-repeat;
+	background-size: 100% 100%;
+}
+.exchange,.exchangesuccess,.exchange .x-layout-card-item,.exchange .x-toolbar{
+	background: rgba(0,0,0,0);
+}
+/*end of exchange css styles*/
 
 
 

@@ -22,7 +22,13 @@ Ext.define('Business.controller.Exchange', {
     	},
     	control:{
     		panel:{
-    			initialize:'initAction'
+    			initialize:'initAction',
+                show:function(){
+                    Ext.getBody().addCls('bg_exchange');
+                },
+                destroy:function(){
+                    Ext.getBody().removeCls('bg_exchange');
+                }                  
     		},
     		segment:{
     			toggle:'itemToggle'
@@ -73,7 +79,7 @@ Ext.define('Business.controller.Exchange', {
     		return;
     	}
     	if(Number(newValue) < 0){
-    		Ext.Msg.alert('信息','兑换积分不能为负数');
+    		Ext.Msg.alert('信息','兑换积分不能小于0分');
     		self.setValue(0);
     		return;
     	}

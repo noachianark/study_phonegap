@@ -20,6 +20,7 @@ Ext.define('Business.view.Exchange', {
 	        		{
 	        			xtype:'segmentedbutton',
 	        			itemId:'segment',
+	        			cls:'segmentedbutton',
 	        			width:'100%',
 	        			allowMultiple: false,
 	        			allowDepress: false,
@@ -95,10 +96,13 @@ Ext.define('Business.view.Exchange', {
 	        },
 	        {
 	        	xtype:'button',
-	        	ui:'action',
 	        	text:'兑换',
 	        	itemId:'exchange',
-	        	margin:10
+                margin:10,
+                style:{
+                    'background':'rgba(255,255,255,0.25)',
+                    'border':'1px solid rgba(255,255,255,1)'
+                }
 	        }
 
         ]

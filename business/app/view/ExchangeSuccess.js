@@ -37,7 +37,12 @@ Ext.define('Business.view.ExchangeSuccess', {
         	{
         		xtype:'button',
         		text:'返回',
-        		itemId:'returnBtn'
+        		itemId:'returnBtn',
+                margin:10,
+                style:{
+                    'background':'rgba(255,255,255,0.25)',
+                    'border':'1px solid rgba(255,255,255,1)'
+                }                
         	}
         ]
     }

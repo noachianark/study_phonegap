@@ -60,7 +60,7 @@ Ext.define('Business.controller.Withdraw', {
     		return;
     	}
     	if(Number(newValue) < 0){
-    		Ext.Msg.alert('信息','取款金额不能为负数');
+    		Ext.Msg.alert('信息','取款金额不能小于0元');
     		self.setValue(0);
     		return;    		
     	}
@@ -81,13 +81,33 @@ Ext.define('Business.controller.Withdraw', {
     		amount:amount+'',note:note,shopId:shopId+'',vipCardId:vipCardId+''
     	};
 
+        if(!me.validateParams(params)){
+            Ext.Viewport.setMasked(false);
+            return;
+        }
+
     	PTransactionAction.withdraw(params,function(actionResult){
     		if(actionResult.success){
     			me.withdrawSuccess(amount);
     		}else{
     			Ext.Msg.alert(actionResult.message);
+                Ext.Viewport.setMasked(false);
     		}
     	});
+    },
+
+    validateParams:function(params){
+        if(params.amount <= 0){
+            Ext.Msg.alert('信息','取款金额不能小于0元');
+            return false;            
+        }
+        var user = this.getUserprofile().userinfo;
+        var max = Number(user.get('deposit'));
+        if(Number(params.amount) > Number(max)){
+            Ext.Msg.alert('信息','取款金额最多为'+max);
+            return false;
+        }
+        return true;    
     },
 
     withdrawSuccess:function(money){

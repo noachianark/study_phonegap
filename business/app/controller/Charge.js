@@ -67,6 +67,12 @@ Ext.define('Business.controller.Charge', {
             note:notes
         };
 
+        if(!me.validateParams(params)){
+            Ext.Viewport.setMasked(false);
+            return;
+        }
+
+
         PTransactionAction.deposit(params,function(actionResult){
             if(actionResult.success){
                 console.log(actionResult);
@@ -105,6 +111,14 @@ Ext.define('Business.controller.Charge', {
 
         //     }
         // });
+    },
+
+    validateParams:function(params){
+        if(Number(params.realAmount)<=0){
+            Ext.Msg.alert('提示','您的充值金额为0元');
+            return false;
+        }
+        return true;
     },
 
     chargeSuccess:function(){

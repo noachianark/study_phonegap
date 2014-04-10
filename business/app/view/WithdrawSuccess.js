@@ -20,53 +20,55 @@ Ext.define('Business.view.WithdrawSuccess', {
                 xtype:'container',
                 flex:1,
                 items:[
-                    xtype:'container',
-                    style:{
-                        background:'rgba(255,255,255,0.6)'
-                    },
-                    items:[
-                        {
-                            xtype:'container',
-                            padding:'10vw 0 10vw 0',
-                            items:[
-                                {
-                                    xtype:'container',
-                                    layout:{
-                                        type:'hbox',
-                                        pack:'center',
-                                        align:'center'
-                                    },
-                                    items:[
-                                        {
-                                            xtype:'label',
-                                            cls:'success-tag'
+                    {                    
+                        xtype:'container',
+                        style:{
+                            background:'rgba(255,255,255,0.6)'
+                        },
+                        items:[
+                            {
+                                xtype:'container',
+                                padding:'10vw 0 10vw 0',
+                                items:[
+                                    {
+                                        xtype:'container',
+                                        layout:{
+                                            type:'hbox',
+                                            pack:'center',
+                                            align:'center'
                                         },
-                                        {
-                                            xtype:'label',
-                                            html:'提现成功',
-                                            margin:'0 0 0 10',
-                                            cls:'withdraw-label-success'
-                                        }
-                                    ]
-                                },
-                                {
-                                    xtype:'label',
-                                    cls:'withdraw-label-success'
-                                },
-                                {
-                                    xtype:'label',
-                                    itemId:'withdraw-money',
-                                    tpl:'提现金额：{money}'
-                                },
-                                {
-                                    xtype:'label',
-                                    cls:'withdraw-label-deposit',
-                                    itemId:'withdraw-deposit',
-                                    tpl:'账户余额{deposit}'
-                                }
-                            ]
-                        }
-                    ]
+                                        items:[
+                                            {
+                                                xtype:'label',
+                                                cls:'success-tag'
+                                            },
+                                            {
+                                                xtype:'label',
+                                                html:'提现成功',
+                                                margin:'0 0 0 10',
+                                                cls:'withdraw-label-success'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype:'label',
+                                        cls:'withdraw-label-success'
+                                    },
+                                    {
+                                        xtype:'label',
+                                        itemId:'withdraw-money',
+                                        tpl:'提现金额：{money}'
+                                    },
+                                    {
+                                        xtype:'label',
+                                        cls:'withdraw-label-deposit',
+                                        itemId:'withdraw-deposit',
+                                        tpl:'账户余额{deposit}'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ]
             },
         	{

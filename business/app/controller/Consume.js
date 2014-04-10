@@ -77,12 +77,12 @@ Ext.define('Business.controller.Consume', {
         var cardpay = Number(this.getPanel().down('formpanel').getValues().cardpay).toFixed(2);
         if(Number(cardpay) > Number(consume) || Number(cardpay) < 0){
             cardpay = consume;
-            this.getCardpayfield().setValue('cardpay',cardpay);
+            //this.getCardpayfield().setValue('cardpay',cardpay);
             Ext.Msg.alert('信息','卡内余额支付金额需小于消费金额');
             return;
         }else if(Number(cardpay) > Number(this.balance)){
             cardpay = this.balance;
-            this.getPanel().down('formpanel').setValue('cardpay',cardpay);
+            //this.getPanel().down('formpanel').setValue('cardpay',cardpay);
             Ext.Msg.Alert('信息','卡内余额不足，余下金额请使用现金支付');
             return;
         }
@@ -107,6 +107,10 @@ Ext.define('Business.controller.Consume', {
             vipCardId:user.get('id')+''
         };
 
+        if(!me.validateParams(params)){
+            return;
+        }
+
         Ext.Viewport.setMasked({
             xtype:'loadmask',
             message:'扣款中请稍后...'
@@ -125,6 +129,14 @@ Ext.define('Business.controller.Consume', {
             }
         );
 
+    },
+
+    validateParams:function(params){
+        if(Number(params.accountPayable)<=0){
+            Ext.Msg.alert('提示','您没有进行任何消费');
+            return false;
+        }
+        return true;
     },
 
     consumeSuccess:function(){

@@ -25,7 +25,7 @@ Ext.define('Business.controller.MainPanel', {
         var me = this;
 
         this.getMainpanel().getTabBar().getAt(0).setFlex(1);
-        //this.getMainpanel().getTabBar().getAt(1).setFlex(1);
+        this.getMainpanel().getTabBar().getAt(1).setFlex(1);
         this.getMainpanel().getTabBar().getAt(2).setFlex(1);
 
         this.getMainpanel().getTabBar().getAt(1).addCls("scanBtn");
