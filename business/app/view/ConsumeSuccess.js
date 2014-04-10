@@ -15,32 +15,76 @@ Ext.define('Business.view.ConsumeSuccess', {
         	type:'vbox'
         },
         items:[
-        	{
-        		xtype:'label',
-        		cls:'consume-label-success'
-        	},
-        	{
-        		xtype:'label',
-        		cls:'consume-label-username',
-        		itemId:'consume-username',
-        		tpl:'消费会员：{username}'
-        	},
-        	{
-        		xtype:'label',
-        		itemId:'consume-balance',
-        		cls:'consume-label-balance',
-        		tpl:'账户余额：{balance}'
-        	},
-        	{
-        		xtype:'label',
-        		itemId:'consume-consume',
-        		cls:'consume-label-consume',
-        		tpl:'消费金额：{consume}'
-        	},
+            {
+                xtype:'container',
+                flex:1,
+                items:[
+                    {
+                        xtype:'container',
+                        style:{
+                            background:'rgba(219,228,221,1)'
+                        },
+                        items:[
+                            {
+                                xtype:'container',
+                                padding:'10vw 0 10vw 0',
+                                items:[
+                                    {
+                                        xtype:'container',
+                                        layout:{
+                                            type:'hbox',
+                                            pack:'center',
+                                            align:'center'
+                                        },
+                                        items:[
+                                            {
+                                                xtype:'label',
+                                                cls:'success-tag'
+                                            },
+                                            {
+                                                xtype:'label',
+                                                html:'支付成功',
+                                                margin:'0 0 0 10',
+                                                cls:'consume-label-success'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype:'label',
+                                        cls:'consume-label-username',
+                                        itemId:'consume-username',
+                                        tpl:'{username}',
+                                        style:'text-align:center'
+                                    },
+                                    {
+                                        xtype:'label',
+                                        itemId:'consume-balance',
+                                        cls:'consume-label-balance',
+                                        tpl:'账户余额：{balance}',
+                                        style:'text-align:center'
+                                    },
+                                    {
+                                        xtype:'label',
+                                        itemId:'consume-consume',
+                                        cls:'consume-label-consume',
+                                        tpl:'消费金额：{consume}',
+                                        style:'text-align:center'
+                                    }                                    
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
         	{
         		xtype:'button',
         		text:'返回',
-        		itemId:'returnBtn'
+        		itemId:'returnBtn',
+                margin:10,
+                style:{
+                    'background':'rgba(255,255,255,0.25)',
+                    'border':'1px solid rgba(255,255,255,1)'
+                }                
         	}
         ]
     }

@@ -1,6 +1,5 @@
 
 html{
-	font-size: 20px;
 	font-weight: bold;
 }
 body{
@@ -29,7 +28,7 @@ body{
 	background: url('../images/login_bg.jpg') no-repeat;
 	background-size: 100% 100%;
 }
-.quick-login.x-form .x-scroll-container, .x-inner.x-form-fieldset-inner{
+.x-form .x-scroll-container, .x-inner.x-form-fieldset-inner{
 	background-color: rgba(0,0,0,0);
 }
 
@@ -161,10 +160,10 @@ body{
 	color:#fff;
 }
 .user-profile .profiles{
-	margin:15px;
+	margin:10px;
 }
 .user-profile .user-avatar{
-	font-size: 15vw;
+	font-size: 18vw;
 	font-family: 'icomoon';
 }
 .user-avatar-inner{
@@ -189,7 +188,7 @@ body{
 }
 
 .user-account-number{
-	font-size: 25px;
+	font-size: 5vw;
 }
 
 
@@ -199,7 +198,6 @@ body{
 
 .user-profile .credits{
 	text-align: center;
-	font-size: 20px;
 	color: #fff;
 	background-color: rgba(0,0,0,0.6);
 }
@@ -208,7 +206,11 @@ body{
 	font-size: 13px;
 }
 .credits .user-rates-label{
-	font-size: 21px;
+	font-size: 5vw;
+}
+
+.user-profile .user-account-info{
+	line-height: 90%;
 }
 
 
@@ -216,34 +218,34 @@ body{
 	-webkit-box-align: end;
 }
 [class*="user-action-"]{
-	width: 50vw;
-	height: 50vw;
+	width: 40vw;
+	height: 40vw;
 	background-color: rgba(0,0,0,0);
 	border:0px;
 }
 .user-profile .user-action-top-left{
 /*	margin:10px 5px 5px 10px;*/
 	background: url('../images/top_left_btn.png') no-repeat;
-	background-size:38vw 38vw;
-	background-position:center;
+	background-size:34vw 34vw;
+	background-position:center top;
 }
 .user-profile .user-action-top-right{
 /*	margin:10px 10px 5px 5px;*/
 	background: url('../images/top_right_btn.png') no-repeat;
-	background-size:38vw 38vw;
-	background-position:center;
+	background-size:34vw 34vw;
+	background-position:center top;
 }
 .user-profile .user-action-bottom-left{
 /*	margin:5px 5px 10px 10px;*/
 	background: url('../images/bottom_left_btn.png') no-repeat;
-	background-size:38vw 38vw;
-	background-position:center;
+	background-size:34vw 34vw;
+	background-position:center top;
 }
 .user-profile .user-action-bottom-right{
 /*	margin:5px 10px 10px 5px;*/
 	background: url('../images/bottom_right_btn.png') no-repeat;
-	background-size:38vw 38vw;
-	background-position:center;
+	background-size:34vw 34vw;
+	background-position:center top;
 }
 /*end of profile css*/
 
@@ -251,16 +253,127 @@ body{
 
 
 
+
 /*css of charge view*/
+.bg_deposit{
+	background: url('../images/bg_deposit.jpg') no-repeat;
+	background-size: 100% 100%;
+}
 .charge .fast-charge{
-	margin: 15px;
+	margin: 10px;
+	background-color: #d4695f;
+	border:0px;
+}
+.charge .x-form-label span{
+	font-size: 12px;
+}
+.charge .x-form-fieldset .x-form-fieldset-inner{
+	border:0px;
+	border-bottom: 1px solid #fff;
+}
+.charge .x-input-el.x-form-field.x-input-number{
+	text-align: right;
+	font-size: 20px;
+}
+.charge .x-form-label span{
+	position: absolute;
+	bottom: 0;
+}
+.charge .x-form-label{
+	padding:0px;
+	width:10%;
+}
+.charge,.chargesuccess{
+	background: rgba(0,0,0,0);
+}
+.chargesuccess .success-tag{
+	width: 10vw;
+	height: 10vw;
+	background: url('../images/success-red.png') no-repeat;
+	background-size: 100% 100%;
+}
+.chargesuccess .charge-label-success{
+	font-size: 10vw;
+	color: #d44a43;
 }
 /*end of charge view css*/
 
 
 
 
+/*consume view css*/
+.bg_consume{
+	background: url('../images/bg_consume.jpg') no-repeat;
+	background-size: 100% 100%;
+}
+.consume,.consumesuccess{
+	background: rgba(0,0,0,0);
+}
+.consume .x-item-disabled input{
+	color: #000;
+}
+.consume .payfor input{
+	color: #449900;
+	font-size: 25px;
+}
+.consume .x-form-fieldset .x-form-fieldset-inner, .consume .x-field-text.x-field {
+	border:0px;
+	border-bottom: 1px dashed #c0c4c8;
+}
+.consume .x-form-label span{
+	font-size: 12px;
+}
+.consumesuccess .success-tag{
+	width: 10vw;
+	height: 10vw;
+	background: url('../images/success-green.png') no-repeat;
+	background-size: 100% 100%;
+}
+.consumesuccess .consume-label-success{
+	font-size: 10vw;
+	color: #7cadab;
+}
+/*end of consume view css*/
+
+
+
+
+/*withdraw css styles*/
+.bg_withdraw{
+	background: url('../images/bg_withdraw.jpg') no-repeat;
+	background-size: 100% 100%;
+}
+.withdraw,.withdrawsuccess{
+	background: rgba(0,0,0,0);
+}
+.withdraw .x-form-fieldset .x-form-fieldset-inner, .withdraw .x-field-text.x-field ,.withdraw .x-container.x-field-number.x-field {
+	border:0px;
+	border-bottom: 1px solid #fff;
+}
+.withdraw .x-input-el.x-form-field.x-input-number{
+	text-align: right;
+	font-size: 20px;
+}
+.withdraw .x-form-label span{
+	font-size: 12px;
+}
+/*end of withdraw css styles*/
+
+
+
 /* fix cupertino css bugs and custom some css styles */
+.x-field-input.x-item-disabled{
+	color: #000;
+}
+
+.x-field{
+	background: rgba(0,0,0,0);
+}
+
+.x-form .x-scroll-container{
+	background: rgba(0,0,0,0);
+}
+
 .x-form-fieldset .x-field:before{
 	left: 0px;
 }
@@ -284,10 +397,57 @@ body{
 	color: #fff;
 }
 
-.x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{
+/*.x-input-el.x-form-field.x-input-text,.x-input-el.x-form-field.x-input-number{
 	font-weight: bolder;
 	color:#8e8e8e;
+}*/
+
+/*loading mask styles*/
+.x-loading-spinner > span.x-loading-top{
+	background-color: rgba(255,255,255,0.99);
 }
+.x-loading-spinner > span.x-loading-top::before{
+	background-color: rgba(255,255,255,0.15);
+}
+.x-loading-spinner > span.x-loading-top::after{
+	background-color: rgba(255,255,255,0.9);
+}
+
+
+.x-loading-spinner > span.x-loading-right{
+	background-color: rgba(255,255,255,0.25);
+}
+.x-loading-spinner > span.x-loading-right::before{
+	background-color: rgba(255,255,255,0.3);
+}
+.x-loading-spinner > span.x-loading-right::after{
+	background-color: rgba(255,255,255,0.2);
+}
+
+
+.x-loading-spinner > span.x-loading-bottom{
+	background-color: rgba(255,255,255,0.4);
+}
+.x-loading-spinner > span.x-loading-bottom::before{
+	background-color: rgba(255,255,255,0.5);
+}
+.x-loading-spinner > span.x-loading-bottom::after{
+	background-color: rgba(255,255,255,0.35);
+}
+
+
+.x-loading-spinner > span.x-loading-left{
+	background-color: rgba(255,255,255,0.7);
+}
+.x-loading-spinner > span.x-loading-left::before{
+	background-color: rgba(255,255,255,0.8);
+}
+.x-loading-spinner > span.x-loading-left::after{
+	background-color: rgba(255,255,255,0.6);
+}
+
+
+/*end of loading mask styles*/
 
 
 /*用来渐变背景图片的*/

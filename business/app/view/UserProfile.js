@@ -44,8 +44,7 @@ Ext.define('Business.view.UserProfile', {
                                     align: 'center'
                                 },
                                 defaults: {
-                                    xtype: 'component',
-                                    margin: '5 5 5 5'
+                                    xtype: 'component'
                                 },
                                 items:[
         							{
@@ -103,7 +102,7 @@ Ext.define('Business.view.UserProfile', {
         		cls:'credits',
                 defaults: {
                     xtype: 'label',
-                    margin: '5 5 5 5'
+                    margin:5
                 },
                 layout:{
                     type:"hbox",
@@ -141,7 +140,8 @@ Ext.define('Business.view.UserProfile', {
         		xtype:'container',
         		layout:{
                     type:"vbox",
-                    pack:"center"
+                    pack:"center",
+                    align:"center"
                 },
                 flex:1,
         		cls:'buttons',
@@ -153,6 +153,7 @@ Ext.define('Business.view.UserProfile', {
                             pack:"center",
                             align:"center"
                         },
+                        flex:1,
                         width:"100%",
                         items:[
                             {
@@ -178,6 +179,7 @@ Ext.define('Business.view.UserProfile', {
                             pack:"center",
                             align:"center"
                         },
+                        flex:1,
                         width:"100%",
                         items:[
                             {

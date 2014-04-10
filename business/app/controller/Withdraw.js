@@ -21,7 +21,13 @@ Ext.define('Business.controller.Withdraw', {
         },
         control:{
         	panel:{
-        		initialize:'initAction'
+        		initialize:'initAction',
+                show:function(){
+                    Ext.getBody().addCls('bg_withdraw');
+                },
+                destroy:function(){
+                    Ext.getBody().removeCls('bg_withdraw');
+                }                
         	},
         	successpanel:{
         		updatedata:'successful'

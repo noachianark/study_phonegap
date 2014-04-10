@@ -21,7 +21,15 @@ Ext.define('Business.controller.Charge', {
             successpanel:'chargesuccess'
         },
         control:{
-        	panel:          {initialize:'initia'},
+        	panel:          {
+                initialize:'initia',
+                show:function(){
+                    Ext.getBody().addCls('bg_deposit');
+                },
+                destroy:function(){
+                    Ext.getBody().removeCls('bg_deposit');
+                }
+            },
         	buttons:        {tap:'fastchargeAction'},
             chargefield:    {change:'chargeinput'},
             chargeBtn:      {tap:'chargeAction'},
@@ -38,7 +46,6 @@ Ext.define('Business.controller.Charge', {
 
     chargeAction:function(btn){
         var me = this;
-        console.log(this.getPanel().getValues());
         var store = Ext.create('Business.store.Charge');
         var user = me.getUserprofile().userinfo;
         Ext.Viewport.setMasked({
@@ -48,7 +55,7 @@ Ext.define('Business.controller.Charge', {
 
         var realAmount = Number(me.getChargefield().getValue());
         var rewardAmount = (Number(user.get('depositMoneyBackPercent')).toFixed(2) * realAmount).toFixed(2) / 100;
-        var notes = this.getPanel().getValues().notes;
+        var notes = this.getPanel().down('formpanel').getValues().notes;
         var cardid = user.get('id');
 
         var params = {

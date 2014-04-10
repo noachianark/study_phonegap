@@ -24,7 +24,13 @@ Ext.define('Business.controller.Consume', {
         },
         control:{
         	panel:{
-        		initialize:'initia'
+        		initialize:'initia',
+                show:function(){
+                    Ext.getBody().addCls('bg_consume');
+                },
+                destroy:function(){
+                    Ext.getBody().removeCls('bg_consume');
+                }
         	},
         	consumefield:{
         		change:'consumeFieldChange'
@@ -56,8 +62,8 @@ Ext.define('Business.controller.Consume', {
     	this.discount = Number(discount?discount:0)/100;
     	this.balance = Number(deposit?deposit:0);
     	this.consume = 0;
-    	this.getPanel().down('#discount').setData({discount:this.discount * 100});
-    	
+    	//this.getPanel().down('#discount').setData({discount:this.discount * 100});
+    	this.getPanel().down('#discount').setValue(Number(this.discount * 100)+'%');
         this.setValue(0);
         this.getCashpayfield().setValue(0);
     },
@@ -66,9 +72,9 @@ Ext.define('Business.controller.Consume', {
         var me = this;
         var user = this.getUserprofile().userinfo;
         //消费金额
-        var consume = Number(this.getPanel().getValues().consumes).toFixed(2);
+        var consume = Number(this.getPanel().down('formpanel').getValues().consumes).toFixed(2);
         //卡内支付
-        var cardpay = Number(this.getPanel().getValues().cardpay).toFixed(2);
+        var cardpay = Number(this.getPanel().down('formpanel').getValues().cardpay).toFixed(2);
         if(Number(cardpay) > Number(consume) || Number(cardpay) < 0){
             cardpay = consume;
             this.getCardpayfield().setValue('cardpay',cardpay);
@@ -76,7 +82,7 @@ Ext.define('Business.controller.Consume', {
             return;
         }else if(Number(cardpay) > Number(this.balance)){
             cardpay = this.balance;
-            this.getPanel().setValue('cardpay',cardpay);
+            this.getPanel().down('formpanel').setValue('cardpay',cardpay);
             Ext.Msg.Alert('信息','卡内余额不足，余下金额请使用现金支付');
             return;
         }
@@ -90,7 +96,7 @@ Ext.define('Business.controller.Consume', {
             accountPayable: accountPayable,
             cardPayment: cardpay+'',
             cashPayment: cashPayment+'',
-            changeAmount: me.getPanel().down('#changeAmount').getData().change+'',
+            changeAmount: me.getPanel().down('#changeAmount').getValue()+'',
             consumeSubject: '消费',
             consumptionAmount:me.getConsumefield().getValue()+'',
             discount:Number(consume * me.discount).toFixed(2)+'',
@@ -230,7 +236,8 @@ Ext.define('Business.controller.Consume', {
         var cardpay = this.getCardpayfield().getValue();
         var needcash = Number(Number(this.consume)*(1-Number(this.discount)) - Number(cardpay)).toFixed(1); 
         if(Number(newValue) >= Number(needcash)){
-            this.getPanel().down('#changeAmount').setData({change:Number(Number(newValue) - Number(needcash)).toFixed(1)});
+            this.getPanel().down('#changeAmount').setValue(Number(Number(newValue) - Number(needcash)).toFixed(1));
+            //this.getPanel().down('#changeAmount').setData({change:Number(Number(newValue) - Number(needcash)).toFixed(1)});
         }else if(needcash=='NaN'){
 
         }else{
@@ -244,8 +251,9 @@ Ext.define('Business.controller.Consume', {
         var user = this.getUserprofile().userinfo;
     	var payfor = (Number(consumed) * ( 1- this.discount )).toFixed(1);
         this.payfor = payfor;
-        this.getPanel().down("#payfor").setData({payfor:payfor});
-    	var bal = this.balance;
+        //this.getPanel().down("#payfor").setData({payfor:payfor});
+    	this.getPanel().down("#payfor").setValue("￥"+payfor+"元");
+        var bal = this.balance;
     	if(this.balance < Number(payfor) ){
     		//余额不足
     		this.getCardpayfield().setValue(Number(this.balance).toFixed(1));
@@ -262,8 +270,8 @@ Ext.define('Business.controller.Consume', {
     		bal = Number(this.balance) - Number(payfor);
     	}
 
-        this.getPanel().down('#changeAmount').setData({change:0});
-
+        // this.getPanel().down('#changeAmount').setData({change:0});
+        this.getPanel().down('#changeAmount').setValue(0);
     	var credit =  Math.round(Number(payfor) * this.rate);
     	this.getPanel().down('#credit').setData({credit:Number(user.get('pointPercent')/100*consumed).toFixed(0)});
     	this.getPanel().down('#balance').setData({balance:Number(bal).toFixed(1)});
