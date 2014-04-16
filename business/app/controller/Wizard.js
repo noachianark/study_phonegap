@@ -45,7 +45,9 @@ Ext.define('Business.controller.Wizard', {
     nextAction:function(nextBtn){
         var store = Ext.getStore('Images');
         if(store.getAllCount() > 0 ){
-            var panel = Ext.create('widget.infopanel',{type:this.getBuffer().type});
+            var panel = Ext.create('widget.infopanel',{
+                data:{type:this.getBuffer().getData().type}
+            });
             this.getNavi().push([panel]);            
         }else{
             Ext.Msg.alert('信息','您还没有添加任何图片信息');
@@ -60,12 +62,12 @@ Ext.define('Business.controller.Wizard', {
         store.each(function (item, index, length) {
             console.log(item.get('description'), index);
             picArr.push({
-                url:item.get('url'),
+                content:item.get('url'),
                 description:item.get('description')
             });
         });
 
-        var type = this.getBuffer().type;
+        var type = this.getBuffer().getData().type;
         if(type=="news"){
             this.publishNews(picArr);
         }else{
@@ -84,13 +86,13 @@ Ext.define('Business.controller.Wizard', {
             businessId:Business.app.userinfo.get('businessId')+'',
             title:me.getInfo().down('#title').getValue()+'',
             content:me.getInfo().down('#content').getValue()+'',
-            pictures:pictures
+            bytePictures:pictures
         };
 
         PMessageAction.publisNews(params,function(actionResult){
             console.log(actionResult);
             if(actionResult.success){
-                me.publishSuccess();
+                me.publishSuccess("#news");
             }else{
                 Ext.Msg.alert('信息',actionResult.message);
             }
@@ -98,10 +100,43 @@ Ext.define('Business.controller.Wizard', {
         });
     },
 
-    publishSuccess:function(){
+    publishCoupon:function(pictures){
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: '发布中请稍后...'
+        });
+
+        var me = this;
+        
+        var params = {
+            businessId:Business.app.userinfo.get('businessId')+'',
+            title:me.getInfo().down('#title').getValue()+'',
+            content:me.getInfo().down('#content').getValue()+'',
+            bytePictures:pictures,
+            startDate:me.getInfo().down('#start').getValue()+'',
+            endDate:me.getInfo().down('#end').getValue()
+        };
+
+        PMessageAction.publisCoupon(params,function(actionResult){
+            console.log(actionResult);
+            if(actionResult.success){
+                me.publishSuccess('#coupons');
+            }else{
+                Ext.Msg.alert('信息',actionResult.message);
+            }
+            Ext.Viewport.setMasked(false);
+        });
+    },
+
+    publishSuccess:function(selector){
         this.getNavi().pop(2);
-        this.getList().down('dataview').getStore().removeAll();
-        this.getList().down('dataview').getStore().loadPage(1);
+        this.getList().down(selector).getStore().removeAll();
+        this.getList().down(selector).getStore().loadPage(1);
+        if(selector == "#news"){
+            this.getList().down('tabpanel').setActiveItem(1);
+        }else{
+            this.getList().down('tabpanel').setActiveItem(0);
+        }
         console.log("jiong");
     }
 });

@@ -14,69 +14,73 @@ Ext.define('Business.view.Login', {
     config: {
         cls:"loginPanel",
     	items: [
-            // {
-            //     xtype: 'label',
-            //     html: '登录失败，请使用正确的密码和用户名.',
-            //     itemId: 'signInFailedLabel',
-            //     hidden: true,
-            //     hideAnimation: 'fadeOut',
-            //     showAnimation: 'fadeIn',
-            //     style: 'color:#990000;margin:5px 0px;'
-            // },
             {
                 xtype: 'fieldset',
                 cls:"fieldSet",
                 items: [
                     {
+                        xtype:'label',
+                        html:'魔客会员商家登录',
+                        style:'text-align:center;font-size:7vw;',
+                        margin:'0 0 40 0'
+                    },                
+                    {
                         xtype: 'textfield',
-                        placeHolder: '用户名',
+                        placeHolder: '用户名啊',
                         name: 'username',
                         itemId:"username",
                         cls:"textfield",
-                        required: true
+                        clearIcon:false
                     },
                     {
                         xtype: 'passwordfield',
                         placeHolder: '密码',
                         name: 'password',
-                        required: true
-                    },
-                    {
-                        xtype : 'img',
-                        itemId : 'verifyImg',
-                        width : 80,
-                        border : false,
-                        height : 30,
-                        cls:'verify-code',
-                        src : basePath + 'verify-code.jsp?date=' + new Date().getTime()
-                    },
-                    {
-                        xtype:'label',
-                        html:'看不清？点击图片刷新'
-                    },
-                    {
-                        xtype:'textfield',
-                        placeHolder:'验证码',
-                        itemId:'verifyCode',
-                        name:'verifycode',
-                        cls:'textfield',
-                        required:true
+                        clearIcon:false
                     },
                     {
                         xtype: 'textfield',
+                        cls:"textfield",
                         placeHolder: '商家域名',
-                        required:true,
                         itemId:'domain',
-                        name:"mall"
+                        name:"mall",
+                        clearIcon:false
+                    },                    
+                    {
+                        xtype:'textfield',
+                        placeHolder:'请输入验证码',
+                        itemId:'verifyCode',
+                        name:'verifycode',
+                        cls:'textfield-veryficode',
+                        clearIcon:false,
+                        style:{
+                            'text-align':'center',
+                            'background':'url("'+ basePath + 'verify-code.jsp?date=' + new Date().getTime() +'") no-repeat',
+                            'background-position':'right'
+                        }
+                    },
+                    {
+                        itemId:'changeCode2',
+                        xtype:'label',
+                        html:'看不清？换一换',
+                        margin:'5 5 5 5',
+                        style:'text-align:right;text-decoration:underline;font-size:14px;'
                     }
                 ]
             },
             {
                 xtype: 'button',
                 itemId: 'logInButton',
-                cls:"button",
-                ui: 'action',
-                text: '登 录'
+                cls:'login-btn',
+                text: '登 录',
+                margin:"20 0"
+            },
+            {
+                xtype:'button',
+                itemId:'backToQuick',
+                cls:'login-btn',
+                text:'返 回',
+                margin:"20 0"
             }
     	]
     }

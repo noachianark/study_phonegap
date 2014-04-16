@@ -11,7 +11,8 @@ Ext.define('Business.model.Stream', {
         	{name:'title',type:'string'},
         	{name:'publishDate',type:'string'},
         	{name:'content',type:'string'},
-        	{name:'pictureUrl',type:'string'}
+        	{name:'pictureUrl',type:'string'},
+        	{name:'love',type:'string'}
         ]
     }
 });

@@ -9,7 +9,6 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
     requires: [
         'Business.view.InfoWizards.ImageItem'
     ],
-    type:'news',
     config: {
 
         cls:"image-buffer",
@@ -34,7 +33,11 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
                 xtype:'button',
                 itemId:'nextBtn',
                 text:'下一步',
-                margin:10
+                margin:10,
+                style:{
+                    'background':'rgba(255,255,255,0.25)',
+                    'border':'1px solid rgba(255,255,255,1)'
+                }
             }
         ]
     },
@@ -58,11 +61,7 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
     	navi.getNavigationBar().add(btn);
         //navi.getNavigationBar().add(this.cancelBtn);
     },
-
-    setType:function(type){
-        this.type = type;
-    },
-
+    
     popActionSheet:function(btn){
         var me = this;
         var picSheet = Ext.Viewport.down('#picsheet');
@@ -71,13 +70,13 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
                 itemId:'picsheet',
                 items:[
                     {
-                        xtype:'component',
-                        html:"<p style='text-align:center';>选择图片来源</p>"
+                        text:"选择图片来源",
+                        cls:'title'
                     },
                     {
-                        iconCls:'icon-camera',
                         itemId:'newsBtn',
                         text: '拍照',
+                        cls:'middle',
                         listeners:{
                             tap:{
                                 fn:function(){
@@ -88,7 +87,7 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
                         }
                     },
                     {
-                        iconCls:'icon-image',
+                        cls:'bottom',
                         itemId:'couponBtn',
                         text: '从手机相册中选择',
                         listeners:{
@@ -100,7 +99,7 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
                     },
                     {
                         text: '取消',
-                        iconCls:'icon-close',
+                        cls:'cancel',
                         listeners:{
                             tap:{
                                 fn:function(){
@@ -129,22 +128,57 @@ Ext.define('Business.view.InfoWizards.ImagesBuffer', {
         var actionSheet = Ext.Viewport.down('#picsheet');
         if(actionSheet){
             actionSheet.hide();
-        }               
-        Ext.getStore('Images').add({
-            url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
-            description:''
-        });
+        }
+
+        navigator.camera.getPicture( 
+            function(imageData){
+                Ext.getStore('Images').add({
+                    url:"data:image/jpeg;base64,"+imageData,
+                    description:''
+                });
+            }, 
+            function(message){
+                Ext.Msg.alert('信息',message);
+            },
+            {
+                quality: 50,
+                destinationType:Camera.DestinationType.DATA_URL,
+                sourceType:Camera.PictureSourceType.CAMERA,
+                encodingType:Camera.EncodingType.JPEG,
+                targetWidth:500,
+                targetHeight:255
+            }
+        );
+
+
+
     },
 
     takeGallery:function(){
         var actionSheet = Ext.Viewport.down('#picsheet');
         if(actionSheet){
             actionSheet.hide();
-        }       
-        Ext.getStore('Images').add({
-            url:'http://i0.wp.com/s.ma.tt/files/2014/03/nophone.png?zoom=1.5&resize=100%2C100',
-            description:''
-        });
+        }
+
+        navigator.camera.getPicture( 
+            function(imageData){
+                Ext.getStore('Images').add({
+                    url:"data:image/jpeg;base64,"+imageData,
+                    description:''
+                });
+            }, 
+            function(message){
+                Ext.Msg.alert('信息',message);
+            },
+            {
+                quality: 50,
+                destinationType:Camera.DestinationType.DATA_URL,
+                sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
+                encodingType:Camera.EncodingType.JPEG,
+                targetWidth:500,
+                targetHeight:255
+            }
+        );
     }
 
 });

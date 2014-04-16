@@ -34,7 +34,7 @@ Ext.define('Business.view.QuickLogin', {
                     {
                         xtype:'label',
                         html:'魔客会员商家登录',
-                        style:'text-align:center;font-size:30px;',
+                        style:'text-align:center;font-size:7vw;',
                         margin:'0 0 40 0'
                     },
         			{
@@ -80,15 +80,7 @@ Ext.define('Business.view.QuickLogin', {
                         xtype:'label',
                         html:'看不清？换一换',
                         margin:'5 5 5 5',
-                        style:'text-align:right;text-decoration:underline;font-size:14px;',
-                        listeners:{
-                            show:function(el){
-                                console.log("cxcxc");
-                                // el.on('tap',function(){
-                                //     console.log("xxx");
-                                // });
-                            }
-                        }
+                        style:'text-align:right;text-decoration:underline;font-size:14px;'
                     },
                     {
                     	xtype:'textfield',

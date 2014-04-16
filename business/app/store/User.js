@@ -15,7 +15,7 @@ Ext.define('Business.store.User', {
 		proxy : {
 			enablePagingParams:false,
 			type : 'direct',
-			directFn : PVipCardAction.getVipCardById,
+			directFn : 'PVipCardAction.getVipCardById',
 			//directFn : PMessageAction.findNews,
 			reader : {
 				type : 'json',

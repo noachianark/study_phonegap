@@ -17,12 +17,30 @@ Ext.define('Business.controller.Main', {
             main:{
                 initialize:'initAction',
                 push:'onPush',
-                pop:'onPop'
+                pop:'onPop',
+                back:function(self,eOpts){
+                    //self.disable();
+                    self.getNavigationBar().getBackButton().disable();
+                }
             }
         }
     },
 
     initAction:function(){
+        var me = this;
+        
+        this.getMain().addBeforeListener('activeitemchange',function(self,value,oldValue,eOpts){
+            if(value.isXType("userprofile")){
+                Ext.getBody().removeCls('bg_deposit');
+                Ext.getBody().removeCls('bg_consume');
+                Ext.getBody().removeCls('bg_exchange');
+                Ext.getBody().removeCls('bg_withdraw');
+            }
+        });
+        this.getMain().addAfterListener('pop',function(){
+            me.getMain().getNavigationBar().getBackButton().enable();
+        });
+
         this.backButtonHandle();
         var userinfo = Ext.getStore('session').load().getAt(0);
         if(null!=userinfo){
@@ -30,6 +48,7 @@ Ext.define('Business.controller.Main', {
             Ext.Viewport.add([{xtype:'quicklogin'}]);
         }else{
             Ext.Viewport.add([{xtype:"loginview"}]);
+            console.log(this.getMain().down("#backToQuick"));
         }
     },
 
@@ -42,6 +61,7 @@ Ext.define('Business.controller.Main', {
 
     onPop:function( navi, view, eOpts ){
         this.removeRightButton();
+        //navi.getNavigationBar().getBackButton().enable();
         if(navi.getActiveItem().setNavBar){
             navi.getActiveItem().setNavBar(navi);
         }
@@ -53,7 +73,6 @@ Ext.define('Business.controller.Main', {
 
     changeTitle:function(container,value,oldValue,eOpts ){
         this.getMain().getNavigationBar().setTitle(value.label);
-        console.log(value.label);
     },
 
 
@@ -66,8 +85,17 @@ Ext.define('Business.controller.Main', {
 		        eve.preventDefault();
 
 		        //do something
-		        alert('back button pressed');
-
+		        
+                // console.dir(this.getMain().getSize());
+                // if(this.getMain().getItems().length<3){
+                //     Ext.Msg.confirm('确认', '确认要退出程序吗？', function(r) {
+                //         if (r == 'yes') {
+                //             setTimeout(function() {             
+                //                 navigator.app.exitApp();
+                //             }, 200);
+                //         }
+                //     });
+                // }
 		    }
 		}
     }

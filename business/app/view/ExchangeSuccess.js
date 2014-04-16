@@ -4,7 +4,7 @@
  * Description
  */
 Ext.define('Business.view.ExchangeSuccess', {
-    extend: 'Ext.Container',
+    extend: 'Ext.Panel',
     alias:'widget.exchangesuccess',
     requires: [
         
@@ -18,22 +18,30 @@ Ext.define('Business.view.ExchangeSuccess', {
         	type:'vbox'
         },
         items:[
-        	{
-        		xtype:'label',
-        		cls:'exchange-label-success'
-        	},
-        	{
-        		xtype:'label',
-        		itemId:'exchange-gain',
-        		cls:'exchange-label-gain',
-        		tpl:'兑换获得{gain}'
-        	},
-        	{
-        		xtype:'label',
-        		itemId:'exchange-point',
-        		cls:'exchange-label-point',
-        		tpl:'剩余积分{point}'
-        	},
+            {
+                xtype:'formpanel',
+                flex:1,
+                items:[
+                    {
+                        xtype:'label',
+                        cls:'exchange-label-success'
+                    },
+                    {
+                        xtype:'label',
+                        itemId:'exchange-gain',
+                        cls:'exchange-label-gain',
+                        style:'text-align:center;',
+                        tpl:'兑换获得{gain}'
+                    },
+                    {
+                        xtype:'label',
+                        itemId:'exchange-point',
+                        cls:'exchange-label-point',
+                        style:'text-align:center;',
+                        tpl:'剩余积分{point}'
+                    }
+                ]
+            },
         	{
         		xtype:'button',
         		text:'返回',

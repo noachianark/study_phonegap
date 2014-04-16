@@ -25,9 +25,6 @@ Ext.define('Business.controller.Charge', {
                 initialize:'initia',
                 show:function(){
                     Ext.getBody().addCls('bg_deposit');
-                },
-                destroy:function(){
-                    Ext.getBody().removeCls('bg_deposit');
                 }
             },
         	buttons:        {tap:'fastchargeAction'},
@@ -45,6 +42,7 @@ Ext.define('Business.controller.Charge', {
     },
 
     chargeAction:function(btn){
+        btn.disable();
         var me = this;
         var store = Ext.create('Business.store.Charge');
         var user = me.getUserprofile().userinfo;
@@ -69,17 +67,18 @@ Ext.define('Business.controller.Charge', {
 
         if(!me.validateParams(params)){
             Ext.Viewport.setMasked(false);
+            btn.enable();
             return;
         }
 
 
         PTransactionAction.deposit(params,function(actionResult){
             if(actionResult.success){
-                console.log(actionResult);
                 me.chargeSuccess();
             }else{
-                console.log("failed");
+                Ext.Msg.alert('信息',actionResult.message);
                 Ext.Viewport.setMasked(false);
+                btn.enable();
             }
             
         });
@@ -136,7 +135,7 @@ Ext.define('Business.controller.Charge', {
                 me.getNavi().push([successpanel]);
                 me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();                
             }else{
-                console.log('失败了');
+                Ext.Msg.alert('信息',actionResult.message);
             }
             Ext.Viewport.setMasked(false);
         });
@@ -149,7 +148,8 @@ Ext.define('Business.controller.Charge', {
         this.getSuccesspanel().down('#charge-username').setData({username:newData.userName});
     },
 
-    confirmAction:function(){
+    confirmAction:function(btn){
+        btn.disable();
         this.getNavi().pop(2);
     },
 
@@ -167,10 +167,8 @@ Ext.define('Business.controller.Charge', {
     },
 
     setValue:function(money){
-        
         var rebate = (Number(money)*Number(this.getUserprofile().userinfo.get('depositMoneyBackPercent'))/100).toFixed(2);
         var af = Number(this.balance) + Number(money) + Number(rebate);
-        console.log(rebate);
         this.getPanel().down('#depositPayback').setData({rebate:rebate});
         this.getPanel().down('#balanceBefore').setData({before:this.balance});
         this.getPanel().down('#balanceAfter').setData({after:af});        

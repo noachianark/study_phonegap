@@ -18,23 +18,20 @@ Ext.define('Business.controller.Login', {
             logfield:"loginview fieldset",
             loginview:"loginview",
             main:'main',
-            verifyimg:'loginview #verifyImg',
+            verifyimg:'loginview #changeCode2',
+            verifycode2:'loginview #verifyCode',
             quicklogin:'quicklogin',
             quickfield:"quicklogin fieldset",
             quickloginbtn:"quicklogin #quickLoginBtn",
             changeCode:'quicklogin #changeCode',
             verifyCode:'quicklogin #verifyCode',
-            switchlogin:"quicklogin #switchLogin"
+            switchlogin:"quicklogin #switchLogin",
+            backtoquick:"loginview #backToQuick"
     	},
 
         control:{
             logBtn:{
                 tap:'onLoginBtnTap'
-            },
-            verifyimg:{
-                tap:function(self){
-                    self.setSrc(basePath + 'verify-code.jsp?date=' + new Date().getTime());
-                }
             },
             quickloginbtn:{
                 tap:'onLoginBtnTap'
@@ -44,6 +41,12 @@ Ext.define('Business.controller.Login', {
             },
             switchlogin:{
                 tap:'onChangeAccount'
+            },
+            loginview:{
+                show:'onShown'
+            },
+            backtoquick:{
+                tap:'onBackToQuick'
             }
         }
 
@@ -51,6 +54,7 @@ Ext.define('Business.controller.Login', {
 
     inita:function(){
         var me = this;
+
         this.getChangeCode().element.on({
             tap:function(self){
                 me.getVerifyCode().setStyle({
@@ -59,11 +63,36 @@ Ext.define('Business.controller.Login', {
                     'background-position':'right'                    
                 });
             }
-        });
+        });      
         //获取本地local storage。
         //var userinfo = Ext.getStore('session').load().getAt(0);
 
         this.getQuickfield().getComponent('nameLabel').setData({username:Business.app.userinfo.get('name')});
+    },
+
+    onShown:function(){
+        var userinfo = Business.app.userinfo;
+        if(!userinfo){
+            this.getLoginview().down("#backToQuick").setHidden(true);
+        }
+        var me = this;
+        this.getVerifyimg().element.on({
+            tap:function(self){
+                me.getLoginview().down('#verifyCode').setStyle({
+                    'text-align':'center',
+                    'background':'url("'+ basePath + 'verify-code.jsp?date=' + new Date().getTime() +'") no-repeat',
+                    'background-position':'right'                    
+                });
+            }
+        });        
+    },
+    onBackToQuick:function(btn){
+        btn.disable();
+        this.getLoginview().destroy();
+        var panel = Ext.create('widget.quicklogin');
+
+        Ext.Viewport.add([panel]);
+        panel.show();        
     },
 
     onChangeAccount:function(btn){
@@ -106,7 +135,7 @@ Ext.define('Business.controller.Login', {
                 }
             });
         }else{
-            //Ext.Viewport.setMasked(false);
+            Ext.Viewport.setMasked(false);
             btn.enable();
         }
     },

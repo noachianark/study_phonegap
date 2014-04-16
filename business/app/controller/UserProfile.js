@@ -23,7 +23,17 @@ Ext.define('Business.controller.UserProfile', {
         },
         control:{
         	userview:{
-        		updatedata:"updateinfo"
+        		updatedata:"updateinfo",
+                initialize:function(){
+                    var me = this;
+                    this.getUserview().on("painted",function(){
+                        me.getCharge().enable();
+                        me.getConsume().enable();
+                        me.getWithdraw().enable();
+                        me.getExchange().enable();                        
+                    });
+
+                }
         	},
         	charge:{
         		tap:"chargeAction"
@@ -40,29 +50,40 @@ Ext.define('Business.controller.UserProfile', {
         }
     },
 
+    disableAllBtn:function(){
+        var me = this;
+        me.getCharge().disable();
+        me.getConsume().disable();
+        me.getWithdraw().disable();
+        me.getExchange().disable();
+    },
+
     chargeAction:function(btn){
+        this.disableAllBtn();
     	var charge = Ext.create('Business.view.Charge');
     	this.getNavi().push([charge]);
     },
 
     consumeAction:function(btn){
+        this.disableAllBtn();
         var consume = Ext.create('Business.view.Consume');
         this.getNavi().push([consume]);
     },
 
     withdrawAction:function(){
+        this.disableAllBtn();
         var withdraw = Ext.create('Business.view.Withdraw');
         this.getNavi().push([withdraw]);
     },
 
     exchangeAction:function(){
+        this.disableAllBtn();
         var exchange = Ext.create('Business.view.Exchange');
         this.getNavi().push([exchange]);
     },
 
     //when view apply setData function , call this function to fill the data to children fields
     updateinfo:function(me, newData, eOpts){
-        console.log(newData);
         this.getUserview().setTitle("您好，"+newData.get('userName'));
     	this.getUserview().userinfo = newData;
 		this.getUserview().down('#balance').setData({balance:newData.get('deposit')});

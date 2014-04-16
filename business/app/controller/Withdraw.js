@@ -24,10 +24,7 @@ Ext.define('Business.controller.Withdraw', {
         		initialize:'initAction',
                 show:function(){
                     Ext.getBody().addCls('bg_withdraw');
-                },
-                destroy:function(){
-                    Ext.getBody().removeCls('bg_withdraw');
-                }                
+                }              
         	},
         	successpanel:{
         		updatedata:'successful'
@@ -66,6 +63,7 @@ Ext.define('Business.controller.Withdraw', {
     	}
     },
     withdrawAction:function(btn){
+        btn.disable();
     	var me = this;
     	var user = this.getUserprofile().userinfo;
     	Ext.Viewport.setMasked({
@@ -83,6 +81,7 @@ Ext.define('Business.controller.Withdraw', {
 
         if(!me.validateParams(params)){
             Ext.Viewport.setMasked(false);
+            btn.enable();
             return;
         }
 
@@ -91,6 +90,7 @@ Ext.define('Business.controller.Withdraw', {
     			me.withdrawSuccess(amount);
     		}else{
     			Ext.Msg.alert(actionResult.message);
+                btn.enable();
                 Ext.Viewport.setMasked(false);
     		}
     	});
@@ -128,6 +128,7 @@ Ext.define('Business.controller.Withdraw', {
                 me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();                
             }else{
                 console.log('失败了');
+                Ext.Msg.alert('信息',actionResult.message);
             }
             Ext.Viewport.setMasked(false);
         });  
@@ -138,7 +139,8 @@ Ext.define('Business.controller.Withdraw', {
     	this.getSuccesspanel().down('#withdraw-money').setData({money:newData.money});
     },
 
-    confirmAction:function(){
+    confirmAction:function(btn){
+        btn.disable();
     	this.getNavi().pop(2);
     }
 });

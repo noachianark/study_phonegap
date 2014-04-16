@@ -3,6 +3,7 @@ Ext.define('Business.view.Main', {
     xtype: 'main',
 
     config: {
+    	defaultBackButtonText:'返回',
     	autoDestroy:true
     }
 });

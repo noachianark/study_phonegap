@@ -27,9 +27,6 @@ Ext.define('Business.controller.Consume', {
         		initialize:'initia',
                 show:function(){
                     Ext.getBody().addCls('bg_consume');
-                },
-                destroy:function(){
-                    Ext.getBody().removeCls('bg_consume');
                 }
         	},
         	consumefield:{
@@ -69,6 +66,7 @@ Ext.define('Business.controller.Consume', {
     },
 
     consumeAction:function(btn){
+        btn.disable();
         var me = this;
         var user = this.getUserprofile().userinfo;
         //消费金额
@@ -77,13 +75,15 @@ Ext.define('Business.controller.Consume', {
         var cardpay = Number(this.getPanel().down('formpanel').getValues().cardpay).toFixed(2);
         if(Number(cardpay) > Number(consume) || Number(cardpay) < 0){
             cardpay = consume;
-            //this.getCardpayfield().setValue('cardpay',cardpay);
+            this.getCardpayfield().setValue('cardpay',cardpay);
             Ext.Msg.alert('信息','卡内余额支付金额需小于消费金额');
+            btn.enable();
             return;
         }else if(Number(cardpay) > Number(this.balance)){
             cardpay = this.balance;
-            //this.getPanel().down('formpanel').setValue('cardpay',cardpay);
+            this.getPanel().down('formpanel').setValue('cardpay',cardpay);
             Ext.Msg.Alert('信息','卡内余额不足，余下金额请使用现金支付');
+            btn.enable();
             return;
         }
 
@@ -108,6 +108,7 @@ Ext.define('Business.controller.Consume', {
         };
 
         if(!me.validateParams(params)){
+            btn.enable();
             return;
         }
 
@@ -123,6 +124,7 @@ Ext.define('Business.controller.Consume', {
                     me.consumeSuccess();
                 }else{
                     Ext.Msg.alert("信息",actionResult.message);
+                    btn.enable();
                     Ext.Viewport.setMasked(false);
                 }
                 
@@ -158,7 +160,7 @@ Ext.define('Business.controller.Consume', {
                 me.getNavi().push([successpanel]);
                 me.getNavi().getNavigationBar().leftBox.query('button')[0].hide();                
             }else{
-                console.log('失败了');
+                Ext.Msg.alert('提示',actionResult.message);
             }
             Ext.Viewport.setMasked(false);
         });
@@ -194,7 +196,8 @@ Ext.define('Business.controller.Consume', {
         this.getSuccesspanel().down('#consume-consume').setData({consume:newData.consume});
     },
 
-    confirmAction:function(){
+    confirmAction:function(btn){
+        btn.disable();
         this.getNavi().pop(2);
     },
 

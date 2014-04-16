@@ -14,6 +14,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
     	layout:{
     		type:'vbox'
     	},
+    	cls:'infopanel',
     	title:'发布',
         items:[
 	        {
@@ -27,6 +28,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 			        	name:'title',
 			        	itemId:'title',
 			        	placeHolder:'请填写标题',
+			        	clearIcon:false,
 			        	margin:10
 			        },
 			        {
@@ -34,6 +36,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 			        	name:'content',
 			        	itemId:'content',
 			        	placeHolder:'请填写描述',
+			        	clearIcon:false,
 			        	margin:10
 			        },
 			        {
@@ -48,7 +51,8 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 							    xtype: 'textfield',
 							    name:'date',
 							    component: {type: 'date'},
-							    margin:10
+							    margin:10,
+							    itemId:'start'
 							},
 							{
 								xtype:'label',
@@ -57,6 +61,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
 							{
 							    xtype: 'textfield',
 							    name:'date',
+							    itemId:'end',
 							    component: {type: 'date'},
 							    margin:10
 							}
@@ -70,7 +75,11 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
         		xtype:'button',
         		text:'发布信息',
         		itemId:'publish',
-        		margin:10
+                margin:10,
+                style:{
+                    'background':'rgba(255,255,255,0.25)',
+                    'border':'1px solid rgba(255,255,255,1)'
+                }
         	}
         ]
     },
@@ -81,7 +90,7 @@ Ext.define('Business.view.InfoWizards.InfoPanel', {
     	
     },
     initialize:function(){
-    	if(this.type=="news"){
+    	if(this.getData().type=="news"){
     		this.down("#container").remove(this.down('#timerange'),true);
     	}
     }

@@ -35,7 +35,7 @@ Ext.define('Business.view.Exchange', {
 							},
 							{
 							    text: '兑换礼品'
-							},
+							}
 	        			]
 	        		}
 	        	]
@@ -49,47 +49,79 @@ Ext.define('Business.view.Exchange', {
 	        	cardSwitchAnimation:'slide',
 	        	items:[
 	        		{
-	        			xtype:'container',
+	        			xtype:'formpanel',
 	        			itemId:'exchangemoney',
 	        			flex:1,
 	        			items:[
-					        {
+							{
 					        	itemId:'pointInfo',
 					        	xtype:'label',
+					        	style:'text-align:center;',
 					        	tpl:'当前积分：{point},最多可兑换{money}元'
 					        },
 					        {
 					        	itemId:'pointField',
 					        	xtype:'numberfield',
-					        	name:'point'
+					        	name:'point',
+					        	cls:'changefor',
+					        	style:'text-align:center;font-size:10vw;',
+					        	clearIcon:false
 					        },
 					        {
 					        	xtype:'label',
+					        	style:'text-align:center;',
 					        	html:'可兑换'
 					        },
 					        {
 					        	xtype:'label',
 					        	itemId:'moneyLabel',
+					        	style:'text-align:center;font-size:10vw;',
 					        	tpl:'<span>￥</span>{money}<span>元</span>'
 					        },
 					        {
 					        	itemId:'noteField',
 					        	xtype:'textfield',
-					        	name:'note'
+					        	name:'note',
+					        	label:'备注',
+					        	margin:20,
+					        	cls:'notes',
+					        	clearIcon:false
 					        },
 					        {
+					        	xtype:'label',
 					        	itemId:'afterLabel',
+					        	style:'text-align:center;',
 					        	tpl:'兑换后积分剩余:{after}'
-					        }
+					        }	        			
 	        			]
 	        		},
 	        		{
-	        			xtype:'container',
+	        			xtype:'formpanel',
 	        			flex:1,
 	        			items:[
-	        				{
-	        					html:'sadasdasd'
-	        				}
+							{
+					        	itemId:'pointInfo2',
+					        	xtype:'label',
+					        	style:'text-align:center;',
+					        	tpl:'当前积分：{point}'
+					        },
+					        {
+					        	itemId:'pointField2',
+					        	xtype:'numberfield',
+					        	name:'point',
+					        	cls:'changefor',
+					        	style:'text-align:center;font-size:10vw;',
+					        	clearIcon:false
+					        },
+					        {
+					        	itemId:'noteField2',
+					        	xtype:'textfield',
+					        	name:'note',
+					        	label:'兑换说明',
+					        	margin:20,
+					        	cls:'notes',
+					        	clearIcon:false
+					        }
 	        			]
 	        		}
 	        	]

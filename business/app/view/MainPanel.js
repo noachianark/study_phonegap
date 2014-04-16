@@ -48,10 +48,21 @@ Ext.define('Business.view.MainPanel', {
 
     quitBtn:{
         xtype:'button',
-        text:'',
-        iconCls:"icon-switch",
+        text:'注销',
+        style:'color:#fff;',
         align:'right',
-        itemId:'quitBtn'
+        itemId:'quitBtn',
+        listeners:{
+            tap:function(){
+                Ext.Msg.confirm('确认', '确认要退出程序吗？', function(r) {
+                    if (r == 'yes') {
+                        setTimeout(function() {             
+                            navigator.app.exitApp();
+                        }, 200);
+                    }
+                });
+            }
+        }
     },
 
     //for every component view which has deal with navbar
@@ -61,13 +72,15 @@ Ext.define('Business.view.MainPanel', {
         if(panel){
             if(panel.isXType('streamlist')){
                 navi.getNavigationBar().add(this.postBtn);
+                navi.getNavigationBar().setTitle("已发布资讯");
             }else{
                 navi.getNavigationBar().add(this.quitBtn);
+                navi.getNavigationBar().setTitle("商家信息");
             }
-            navi.getNavigationBar().setTitle(panel.label);
+            //navi.getNavigationBar().setTitle(panel.label);
             return;
         }
-        navi.getNavigationBar().setTitle(this.getActiveItem().label);
+        //navi.getNavigationBar().setTitle(this.getActiveItem().label);
 
         if(this.getActiveItem().isXType('streamlist')){
             navi.getNavigationBar().add(this.postBtn);
