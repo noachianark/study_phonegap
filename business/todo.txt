@@ -1,0 +1,38 @@
+1、点击完成按钮不会刷新列表
+
+2、需要调整发布时图片大小
+
+3、需要调整发布的界面
+
+4、发布优惠时连带时间 
+
+5、限制时间范围
+
+6、登录时产生蓝色背景                 X
+
+7、更改对话框的英文                   X
+
+8、按钮双击问题		              ing
+
+9、无法连接服务器的问题
+
+10、刷新列表时有时无法刷新出数据。（无法找到record.raw引起）
+
+11、刷新列表时会少一条数据
+
+12、安卓客户端后退键计划完全禁用      X
+
+13、注销退出程序功能                  X
+
+14、从消费操作中返回时背景切换不及时  X
+
+
+
+
+1、首先sencha cordova init com.xx.oo Xxoo
+2、cordova plugin add ...
+3、sencha app build native
+4、修改config.xml以及工程中的图片引用
+5、sencha app build testing.
+6、copy build/testing/Xxoo下的文件至assets/www下。
+7、运行程序。
